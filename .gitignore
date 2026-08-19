@@ -1,0 +1,5 @@
+.DS_Store
+audit-out/
+paths-out/
+shots*/
+*.log

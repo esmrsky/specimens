@@ -1,0 +1,20 @@
+{ "defaults": { "width": 1280, "theme": "light" },
+  "paths": [
+    { "name": "tooltip-pin-and-escape", "steps": [
+      { "click": "#pattern .ref-link" }, { "wait": 2500 },
+      { "assert": "document.querySelector('.verse-tooltip').classList.contains('open')", "name": "tooltip opens on click" },
+      { "assert": "!/Loading|Unable/.test(document.querySelector('.verse-tooltip .tooltip-text').textContent)", "name": "verse text loaded" },
+      { "key": "Escape" }, { "wait": 400 },
+      { "assert": "!document.querySelector('.verse-tooltip').classList.contains('open')", "name": "Escape closes pinned tooltip" },
+      { "shot": "after-escape" } ] },
+    { "name": "version-pick-keeps-tooltip", "steps": [
+      { "click": "#pattern .ref-link" }, { "wait": 2000 },
+      { "click": "#verpick-btn" }, { "wait": 300 },
+      { "click": "#verpick-menu .verpick-opt[data-v=NLT]" }, { "wait": 1500 },
+      { "assert": "document.querySelector('.verse-tooltip').classList.contains('open')", "name": "tooltip stays open after version change" },
+      { "assert": "document.querySelector('.verse-tooltip .tooltip-ref').textContent.includes('NLT')", "name": "tooltip re-fetched in NLT" } ] },
+    { "name": "mobile-hero-preview-visible", "width": 375, "steps": [
+      { "click": ".legend-chip[data-thread=lamb]" }, { "wait": 500 },
+      { "assert": "(() => { const r = document.getElementById('thread-preview').getBoundingClientRect(); return r.top < innerHeight && r.height < innerHeight; })()", "name": "preview card is on screen and shorter than the viewport" },
+      { "shot": "after-tap" } ] }
+  ] }
