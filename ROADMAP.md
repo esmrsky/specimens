@@ -9,7 +9,7 @@ specimens that all work beautifully beats a larger set with broken ones.
 
 ---
 
-## 1 · Drop the "How it's built" snippets  ← do this first
+## 1 · Drop the "How it's built" snippets  ✅ done
 
 Every specimen currently ends with a `<details class="specimen__code">` toggle containing a CSS/JS
 snippet. **Remove all of them.** The owner builds with AI; the code isn't the value. What matters is

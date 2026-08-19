@@ -53,7 +53,6 @@
             <li><b>Live filter</b> — the search box in the sidebar</li>
             <li><b>Back-to-top</b> button that appears after scrolling</li>
             <li><b>Reduced-motion</b> respect via <code>prefers-reduced-motion</code></li>
-            <li><b>Progressive disclosure</b> — the "How it's built" toggles</li>
             <li><b>Card</b> frame around every specimen, on a <b>surface/background</b> token pair</li>
           </ul>
         </div>
@@ -76,16 +75,6 @@
             </div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> documentation, dashboards, news sites — anything with persistent side navigation plus supplementary content.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.holy {
-  display: grid;
-  grid-template-columns: 120px 1fr 120px;
-  grid-template-areas:
-    "header header header"
-    "nav    main   aside"
-    "footer footer footer";
-}
-.holy__m { grid-area: main; }
-/* mobile: one column, areas stacked */</code></pre></details>
         </article>
 
         <article class="specimen" id="sidebar-layout" data-terms="every layout flex wrap intrinsic">
@@ -95,24 +84,15 @@
             <div class="sb"><div class="box box--muted">sidebar<br>(flex-basis: 12rem)</div><div class="box box--tall">main (flex-grow: 999; min-width: 55%)</div></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> a media object, a settings panel next to a preview, any "label + content" pair that should degrade gracefully.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.sb { display: flex; flex-wrap: wrap; gap: .75rem; }
-.sb > :first-child { flex-basis: 12rem; flex-grow: 1; }
-.sb > :last-child  { flex-basis: 0; flex-grow: 999; min-inline-size: 55%; }</code></pre></details>
         </article>
 
         <article class="specimen" id="card-grid" data-terms="ram auto-fit minmax responsive grid">
           <div class="specimen__head"><h3>Responsive Card Grid</h3><p class="specimen__aka">RAM (repeat, auto-fit, minmax), auto-fill grid</p><span class="tag">Layout</span></div>
-          <p class="specimen__desc">One line of CSS that fits as many equal columns as will hold a minimum width, and reflows without breakpoints. The single most useful grid recipe.</p>
+          <p class="specimen__desc">One line of CSS that fits as many equal columns as will hold a minimum width, and reflows without breakpoints. The single most useful grid recipe. The subtle choice: <code>auto-fit</code> collapses empty tracks so few items stretch wide; <code>auto-fill</code> keeps the empty tracks so items hold their size.</p>
           <div class="specimen__demo">
             <div class="ram"><div class="box">1</div><div class="box">2</div><div class="box">3</div><div class="box">4</div><div class="box">5</div><div class="box">6</div></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> product grids, blog listings, team pages, galleries.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.ram {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
-  gap: .75rem;
-}
-/* auto-fit collapses empty tracks; auto-fill keeps them */</code></pre></details>
         </article>
 
         <article class="specimen" id="bento" data-terms="bento box grid span dashboard tiles">
@@ -122,9 +102,6 @@
             <div class="bento"><div class="box b1">2×2</div><div class="box b2">2×1</div><div class="box b3">1×2</div><div class="box b4">1×1</div><div class="box b5">3×1</div></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> feature overviews, dashboards, portfolio landing pages — content of varying importance you want to show at once.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 70px; gap: .6rem; }
-.b1 { grid-column: span 2; grid-row: span 2; }
-.b5 { grid-column: span 3; }</code></pre></details>
         </article>
 
         <article class="specimen" id="split-screen" data-terms="50/50 hero two column">
@@ -134,19 +111,15 @@
             <div class="split"><div class="split__media"><h4 style="color:#fff">Visual half</h4><p style="margin:0">image, illustration, product shot</p></div><div class="split__text"><h4>Text half</h4><p style="margin:0 0 .75rem" class="muted">Headline, supporting copy, a call to action.</p><button class="btn btn--sm">Get started</button></div></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> heroes, feature explainers, login pages (form on one side, brand on the other).</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }</code></pre></details>
         </article>
 
         <article class="specimen" id="full-bleed" data-terms="breakout container edge to edge">
           <div class="specimen__head"><h3>Full-Bleed Section</h3><p class="specimen__aka">breakout, edge-to-edge, "bleed"</p><span class="tag">Layout</span></div>
-          <p class="specimen__desc">Text sits in a comfortable narrow measure, but a specific element (image, colored band) breaks out to the container's edges. Borrowed from print, where "bleed" means ink runs off the page.</p>
+          <p class="specimen__desc">Text sits in a comfortable narrow measure, but a specific element (image, colored band) breaks out to the container's edges — via negative inline margins, or a three-column grid where the bleed spans all columns. Borrowed from print, where "bleed" means ink runs off the page.</p>
           <div class="specimen__demo is-flush">
             <div class="bleed-wrap"><p>Constrained prose column, easy to read…</p><div class="full-bleed">full-bleed band</div><p class="mt-4">…and back to the constrained column.</p></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> long-form articles with hero images, colored CTA bands inside a narrow content column.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.wrap > * { max-width: 65ch; margin-inline: auto; }
-.wrap > .full-bleed { max-width: none; margin-inline: calc(-1 * var(--pad)); }
-/* or with grid: grid-template-columns: 1fr min(65ch, 100%) 1fr; .full-bleed { grid-column: 1 / -1; } */</code></pre></details>
         </article>
 
         <article class="specimen" id="stack" data-terms="owl selector lobotomized owl flow spacing rhythm">
@@ -156,7 +129,6 @@
             <div class="stack" style="--stack-space:.6rem"><div class="box box--muted">one</div><div class="box box--muted">two</div><div class="box box--muted">three</div></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> everywhere. It replaces ad-hoc margin-bottom on every element and is the basis of good "vertical rhythm".</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.stack > * + * { margin-block-start: var(--stack-space, 1rem); }</code></pre></details>
         </article>
 
         <article class="specimen" id="cluster" data-terms="tags chips wrap inline group">
@@ -166,7 +138,6 @@
             <div class="cluster"><span class="badge">design</span><span class="badge">css</span><span class="badge">layout</span><span class="badge">accessibility</span><span class="badge">typography</span><span class="badge">motion</span><span class="badge">color theory</span><span class="badge">grid</span></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> tags, filter chips, button groups, nav links.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.cluster { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }</code></pre></details>
         </article>
 
         <article class="specimen" id="center" data-terms="centering place-items vertical horizontal">
@@ -174,7 +145,6 @@
           <p class="specimen__desc">Perfect horizontal + vertical centering, once the hardest thing in CSS. Now: <code>display: grid; place-items: center</code>.</p>
           <div class="specimen__demo"><div class="center-demo box--muted" style="border:1px solid var(--border);border-radius:var(--r-2)"><div class="box">centered</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> empty states, hero content, modals, icons in buttons.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.center { display: grid; place-items: center; }</code></pre></details>
         </article>
 
         <article class="specimen" id="cover" data-terms="hero viewport min-height cover">
@@ -182,8 +152,6 @@
           <p class="specimen__desc">A block that fills the viewport height with a centered principal element and optional header/footer pinned to top and bottom. The "hero" is the first thing users see — the space above the fold.</p>
           <div class="specimen__demo is-flush"><div class="cover"><p class="small muted" style="margin:0">↑ pinned top (nav)</p><div><h4 style="margin:0">Centered headline</h4><p class="muted small" style="margin:0">Supporting line + primary CTA</p></div><p class="small muted" style="margin:0;text-align:center">↓ pinned bottom (scroll cue)</p></div></div>
           <p class="specimen__use"><strong>Use when:</strong> landing pages, section intros.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.cover { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }
-.cover > :nth-child(2) { align-self: center; }</code></pre></details>
         </article>
 
         <article class="specimen" id="sticky-footer" data-terms="footer bottom short page">
@@ -191,7 +159,6 @@
           <p class="specimen__desc">The footer stays at the bottom of the viewport when content is short, but is pushed down naturally when content is long. Not to be confused with <code>position: sticky</code>.</p>
           <div class="specimen__demo"><div class="sticky-footer-demo"><div class="box box--muted">header</div><div class="box">short content (1fr)</div><div class="box box--muted">footer stays at bottom</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> every page — a footer floating mid-screen looks broken.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>body { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }</code></pre></details>
         </article>
 
         <article class="specimen" id="aspect-ratio" data-terms="16:9 square image placeholder video">
@@ -199,7 +166,6 @@
           <p class="specimen__desc">Boxes that keep a fixed proportion as they resize — essential for image/video placeholders so the layout doesn't jump when media loads (avoids "layout shift").</p>
           <div class="specimen__demo"><div class="ratios"><div class="ratio" style="aspect-ratio:1">1:1</div><div class="ratio" style="aspect-ratio:4/3">4:3</div><div class="ratio" style="aspect-ratio:16/9">16:9</div><div class="ratio" style="aspect-ratio:2/3">2:3</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> thumbnails, video embeds, avatars, cards with media.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.thumb { aspect-ratio: 16 / 9; object-fit: cover; }</code></pre></details>
         </article>
 
         <article class="specimen" id="container-queries" data-terms="@container component responsive">
@@ -210,8 +176,6 @@
             <p class="demo-note">↘ drag the bottom-right corner</p>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> reusable components dropped into layouts of unknown width.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.host { container-type: inline-size; }
-@container (min-width: 420px) { .card { grid-template-columns: 160px 1fr; } }</code></pre></details>
         </article>
 
         <article class="specimen" id="masonry" data-terms="pinterest columns brick waterfall">
@@ -219,8 +183,6 @@
           <p class="specimen__desc">Items of varying height packed into columns with no horizontal gaps. CSS multi-column gives an approximation (order flows down columns, not across rows); true masonry needs JS or the emerging <code>grid-template-rows: masonry</code>.</p>
           <div class="specimen__demo"><div class="masonry"><div class="box" style="height:60px">a</div><div class="box box--muted" style="height:110px">b</div><div class="box" style="height:80px">c</div><div class="box box--muted" style="height:50px">d</div><div class="box" style="height:130px">e</div><div class="box box--muted" style="height:70px">f</div><div class="box" style="height:90px">g</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> image galleries, mood boards, mixed-length cards where reading order doesn't matter much.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.masonry { columns: 3 140px; column-gap: .75rem; }
-.masonry > * { break-inside: avoid; margin-bottom: .75rem; }</code></pre></details>
         </article>
       </section>
 
@@ -237,9 +199,6 @@
           <p class="specimen__desc">Brand on the left, links in the middle or right, one primary call-to-action highlighted. The site's own header (above) is a <em>sticky</em> navbar that <em>hides on scroll-down</em> — a pattern that reclaims screen space on mobile.</p>
           <div class="specimen__demo"><nav class="mini-nav" aria-label="Example"><strong>Brand</strong><a href="#navbar">Product</a><a href="#navbar">Pricing</a><a href="#navbar">Docs</a><span class="spacer"></span><a href="#navbar" class="muted">Sign in</a><button class="btn btn--sm">Get started</button></nav></div>
           <p class="specimen__use"><strong>Use when:</strong> always. Keep it to 5–7 items; more than that wants a mega menu or a drawer.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.nav { display: flex; align-items: center; gap: 1rem; }
-.nav .spacer { flex: 1; }   /* pushes the rest right */
-/* sticky + hide-on-scroll: position: sticky; top: 0; toggle .is-hidden via scroll direction in JS */</code></pre></details>
         </article>
 
         <article class="specimen" id="hamburger" data-terms="drawer off-canvas mobile menu slide">
@@ -247,9 +206,6 @@
           <p class="specimen__desc">The ☰ icon opens a panel that slides in from the edge over a dimmed backdrop ("scrim"). Tap the scrim or press Esc to close. This site uses one under 900px wide — try it, or click below.</p>
           <div class="specimen__demo"><button class="btn btn--secondary" id="drawerDemoBtn">☰ Open the site drawer</button><p class="demo-note">On wide screens the sidebar is already visible, so this only slides in on narrow viewports.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> mobile nav, filter panels, settings. Avoid hiding primary nav behind a hamburger on desktop — discoverability drops.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.drawer { position: fixed; inset: 0 auto 0 0; transform: translateX(-100%); transition: transform .4s; }
-body.drawer-open .drawer { transform: none; }
-.scrim { position: fixed; inset: 0; background: rgb(0 0 0 / .4); }</code></pre></details>
         </article>
 
         <article class="specimen" id="mega-menu" data-terms="dropdown panel columns hover">
@@ -257,9 +213,6 @@ body.drawer-open .drawer { transform: none; }
           <p class="specimen__desc">A large dropdown panel showing many links grouped in columns — used when a site has too many sections for a plain dropdown. Hover or click "Products".</p>
           <div class="specimen__demo" style="min-height:220px"><nav class="mini-nav" aria-label="Mega menu example"><strong>Brand</strong><div class="mega"><button class="btn btn--tertiary btn--sm" id="megaBtn" aria-expanded="false" aria-controls="megaPanel">Products ▾</button><div class="mega__panel" id="megaPanel" hidden><div><h5>Build</h5><a href="#mega-menu">Editor</a><a href="#mega-menu">Components</a><a href="#mega-menu">Templates</a></div><div><h5>Ship</h5><a href="#mega-menu">Hosting</a><a href="#mega-menu">Domains</a><a href="#mega-menu">Analytics</a></div><div><h5>Learn</h5><a href="#mega-menu">Docs</a><a href="#mega-menu">Guides</a><a href="#mega-menu">Community</a></div></div></div><a href="#mega-menu">Pricing</a></nav></div>
           <p class="specimen__use"><strong>Use when:</strong> e-commerce, large corporate sites. Group by task, keep 3–5 columns.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.mega { position: relative; }
-.mega__panel { position: absolute; top: 100%; display: grid; grid-template-columns: repeat(3, 1fr); }
-/* toggle [hidden] on click; aria-expanded on the trigger */</code></pre></details>
         </article>
 
         <article class="specimen" id="dropdown" data-terms="menu popup select actions">
@@ -267,9 +220,6 @@ body.drawer-open .drawer { transform: none; }
           <p class="specimen__desc">A button that reveals a short list of actions. The "kebab" (⋮) and "meatball" (⋯) icons are conventional triggers for overflow menus. Closes on outside click and Esc; arrow keys move focus.</p>
           <div class="specimen__demo" style="min-height:190px"><div class="dropdown"><button class="btn btn--secondary" id="ddBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="ddMenu">Actions ▾</button><ul class="dropdown__menu" id="ddMenu" role="menu" hidden><li role="none"><button role="menuitem">Rename</button></li><li role="none"><button role="menuitem">Duplicate</button></li><li role="none"><button role="menuitem">Move to…</button></li><hr><li role="none"><button role="menuitem" style="color:var(--danger)">Delete</button></li></ul></div></div>
           <p class="specimen__use"><strong>Use when:</strong> secondary actions on a row/card, user account menus.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;button aria-haspopup="menu" aria-expanded="false" aria-controls="menu"&gt;
-&lt;ul role="menu" hidden&gt;&lt;li role="none"&gt;&lt;button role="menuitem"&gt;
-/* JS: toggle hidden; document click outside → close; Escape → close & refocus trigger */</code></pre></details>
         </article>
 
         <article class="specimen" id="breadcrumbs" data-terms="path trail hierarchy location">
@@ -277,8 +227,6 @@ body.drawer-open .drawer { transform: none; }
           <p class="specimen__desc">Shows where the current page sits in the hierarchy and lets users jump up levels. The current page is plain text (not a link) with <code>aria-current="page"</code>.</p>
           <div class="specimen__demo"><nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="#breadcrumbs">Home</a></li><li><a href="#breadcrumbs">Library</a></li><li><a href="#breadcrumbs">Patterns</a></li><li aria-current="page">Breadcrumbs</li></ol></nav></div>
           <p class="specimen__use"><strong>Use when:</strong> deep hierarchies — docs, e-commerce categories, file browsers. Not for flat sites.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.crumbs { display: flex; gap: .4rem; list-style: none; }
-.crumbs li + li::before { content: "/"; color: var(--muted); }</code></pre></details>
         </article>
 
         <article class="specimen" id="tabs" data-terms="tablist panels switch">
@@ -291,9 +239,6 @@ body.drawer-open .drawer { transform: none; }
             <div role="tabpanel" id="tp3" aria-labelledby="tab3" class="small" hidden>Reviews panel. Underline indicator = the "selected" affordance.</div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> 2–6 related views of one object (product details, settings groups).</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>[role=tab][aria-selected=true] { border-bottom: 2px solid var(--accent); }
-[role=tabpanel][hidden] { display: none; }
-/* JS: on click/arrow → set aria-selected, hidden, and roving tabindex */</code></pre></details>
         </article>
 
         <article class="specimen" id="pagination" data-terms="pages next previous numbers">
@@ -301,7 +246,6 @@ body.drawer-open .drawer { transform: none; }
           <p class="specimen__desc">Numbered links through a long list, with truncation ("…") for many pages. Alternatives: <em>infinite scroll</em> (auto-loads more) and <em>load-more button</em>. Pagination is best when users need to return to a specific spot.</p>
           <div class="specimen__demo"><nav aria-label="Pagination"><ul class="pager"><li><a href="#pagination" aria-label="Previous">‹</a></li><li><a href="#pagination">1</a></li><li><a href="#pagination" aria-current="page">2</a></li><li><a href="#pagination">3</a></li><li><span class="ellipsis">…</span></li><li><a href="#pagination">12</a></li><li><a href="#pagination" aria-label="Next">›</a></li></ul></nav></div>
           <p class="specimen__use"><strong>Use when:</strong> search results, tables, archives.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.pager [aria-current] { background: var(--accent); color: var(--accent-ink); }</code></pre></details>
         </article>
 
         <article class="specimen" id="stepper-nav" data-terms="wizard progress steps checkout">
@@ -309,8 +253,6 @@ body.drawer-open .drawer { transform: none; }
           <p class="specimen__desc">Shows position in a sequential flow: done, current, upcoming. Unlike tabs, order matters and later steps are often locked.</p>
           <div class="specimen__demo"><ol class="stepper-nav"><li class="is-done"><span class="dot">✓</span>Cart</li><li class="is-current"><span class="dot">2</span>Shipping</li><li><span class="dot">3</span>Payment</li><li><span class="dot">4</span>Review</li></ol></div>
           <p class="specimen__use"><strong>Use when:</strong> checkout, onboarding, any form too long for one screen.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.stepper li + li::before { content: ""; width: 32px; height: 2px; background: var(--border); }
-.is-done .dot { background: var(--success); }  .is-current .dot { border-color: var(--accent); }</code></pre></details>
         </article>
 
         <article class="specimen" id="scrollspy" data-terms="toc table of contents intersection observer active">
@@ -318,10 +260,6 @@ body.drawer-open .drawer { transform: none; }
           <p class="specimen__desc">A list of in-page anchor links whose active item tracks the section currently in view. Look at the sidebar of this page as you scroll — that's it. Built with <code>IntersectionObserver</code>, not scroll listeners.</p>
           <div class="specimen__demo"><p class="small" style="margin:0">← The sidebar TOC on this page is the live demo. Also note <code>scroll-margin-top</code> on sections so anchors land below the sticky header, and <code>scroll-behavior: smooth</code> on <code>html</code>.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> long docs, articles with many headings, single-page sites.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-}, { rootMargin: "-20% 0px -70% 0px" });
-sections.forEach(s => io.observe(s));</code></pre></details>
         </article>
 
         <article class="specimen" id="back-to-top" data-terms="scroll top button floating">
@@ -329,8 +267,6 @@ sections.forEach(s => io.observe(s));</code></pre></details>
           <p class="specimen__desc">A floating button that fades in after the user has scrolled a screen or so, and scrolls smoothly back to the top. A "FAB" more generally is any floating circular action button (Material Design term).</p>
           <div class="specimen__demo"><p class="small" style="margin:0">↘ Look at the bottom-right corner of this page — you've scrolled far enough for it to be visible.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> long pages, especially on mobile.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>window.addEventListener("scroll", () => btn.classList.toggle("is-visible", scrollY > 600), { passive: true });
-btn.onclick = () => scrollTo({ top: 0, behavior: "smooth" });</code></pre></details>
         </article>
 
         <article class="specimen" id="skip-link" data-terms="accessibility keyboard a11y bypass">
@@ -338,8 +274,6 @@ btn.onclick = () => scrollTo({ top: 0, behavior: "smooth" });</code></pre></deta
           <p class="specimen__desc">A visually hidden link, first in the tab order, that jumps keyboard users past the header straight to main content. Click somewhere blank on the page, then press <kbd>Tab</kbd> once — it appears top-left.</p>
           <div class="specimen__demo"><p class="small" style="margin:0">Press <kbd>Tab</kbd> from the top of this page to reveal it.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> always. It's a WCAG requirement and costs three lines.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.skip-link { position: absolute; top: -100px; }
-.skip-link:focus { top: .5rem; }</code></pre></details>
         </article>
       </section>
 
@@ -356,17 +290,13 @@ btn.onclick = () => scrollTo({ top: 0, behavior: "smooth" });</code></pre></deta
           <p class="specimen__desc">A small set of font sizes derived from one ratio (e.g. 1.25 "major third", 1.333 "perfect fourth") instead of arbitrary numbers. Consistency comes from choosing sizes from the scale, never inventing new ones.</p>
           <div class="specimen__demo scale-demo"><p style="font-size:var(--fs-4);font-weight:800">Display<small>--fs-4</small></p><p style="font-size:var(--fs-3);font-weight:700">Heading<small>--fs-3</small></p><p style="font-size:var(--fs-2);font-weight:700">Subheading<small>--fs-2</small></p><p style="font-size:var(--fs-1);font-weight:600">Lead<small>--fs-1</small></p><p style="font-size:var(--fs-0)">Body<small>--fs-0</small></p><p style="font-size:var(--fs--1)" class="muted">Caption<small>--fs--1</small></p></div>
           <p class="specimen__use"><strong>Use when:</strong> always — define 5–7 steps as tokens and use only those.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>/* ratio 1.25 from 1rem: 0.8, 1, 1.25, 1.563, 1.953, 2.441 … */
---fs-0: 1rem; --fs-1: 1.25rem; --fs-2: 1.563rem; --fs-3: 1.953rem;</code></pre></details>
         </article>
 
         <article class="specimen" id="fluid-type" data-terms="clamp responsive font-size viewport">
           <div class="specimen__head"><h3>Fluid Type</h3><p class="specimen__aka">responsive typography, clamp() type</p><span class="tag">Typography</span></div>
-          <p class="specimen__desc">Font sizes that scale smoothly with the viewport between a minimum and maximum, without breakpoints. Every size on this page is fluid — resize the window and watch the headings.</p>
+          <p class="specimen__desc">Font sizes that scale smoothly with the viewport between a minimum and maximum, without breakpoints. Always include a <code>rem</code> term in the preferred value so text still grows when the user zooms. Every size on this page is fluid — resize the window and watch the headings.</p>
           <div class="specimen__demo"><p style="font-size:clamp(1.2rem,.5rem + 3vw,2.6rem);font-weight:700;margin:0;line-height:1.1">clamp(1.2rem, .5rem + 3vw, 2.6rem)</p><p class="demo-note">min · preferred (scales with vw) · max</p></div>
           <p class="specimen__use"><strong>Use when:</strong> headings and display type; body text can stay closer to fixed.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>h1 { font-size: clamp(2rem, 1.2rem + 3.5vw, 4rem); }
-/* always include a rem term so it still responds to user zoom */</code></pre></details>
         </article>
 
         <article class="specimen" id="measure" data-terms="line length ch characters readability width">
@@ -374,7 +304,6 @@ btn.onclick = () => scrollTo({ top: 0, behavior: "smooth" });</code></pre></deta
           <p class="specimen__desc">Lines longer than ~75 characters are tiring: the eye loses its place on the return sweep. Constrain prose with <code>max-width</code> in <code>ch</code> units (width of the "0" glyph). Compare:</p>
           <div class="specimen__demo"><p class="measure-demo small"><strong>~65ch (good):</strong> The quick brown fox jumps over the lazy dog while the five boxing wizards jump quickly and the sphinx of black quartz judges my vow, packing my box with five dozen liquor jugs.</p><p class="measure-demo measure-demo--bad small" style="margin:0"><strong>Unconstrained (bad on wide screens):</strong> The quick brown fox jumps over the lazy dog while the five boxing wizards jump quickly and the sphinx of black quartz judges my vow, packing my box with five dozen liquor jugs, and then keeps going, and going, and the line gets very hard to follow back to the start.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> any paragraph text. 45–75ch; ~65ch is a good default.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.prose { max-width: 65ch; }</code></pre></details>
         </article>
 
         <article class="specimen" id="hierarchy" data-terms="visual hierarchy weight size color kicker">
@@ -382,9 +311,6 @@ btn.onclick = () => scrollTo({ top: 0, behavior: "smooth" });</code></pre></deta
           <p class="specimen__desc">Size, weight, color, and spacing tell the eye what to read first. The three-level combo below is the workhorse: a small uppercase <em>kicker</em> (aka eyebrow/overline), a bold <em>headline</em>, and a muted <em>dek</em> (subhead), plus dim <em>meta</em>.</p>
           <div class="specimen__demo"><div class="hierarchy"><span class="kicker">Kicker / eyebrow</span><span class="h">The headline carries the weight</span><span class="sub">The dek or subhead explains, in a lighter color and normal weight.</span><span class="meta">Meta · 4 min read · Aug 2026</span></div></div>
           <p class="specimen__use"><strong>Use when:</strong> section intros, cards, article headers, hero blocks.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.kicker { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 700; }
-.h { font-size: 1.6rem; font-weight: 700; line-height: 1.15; }
-.sub { color: var(--muted); }</code></pre></details>
         </article>
 
         <article class="specimen" id="rhythm" data-terms="vertical rhythm leading line-height baseline spacing">
@@ -392,8 +318,6 @@ btn.onclick = () => scrollTo({ top: 0, behavior: "smooth" });</code></pre></deta
           <p class="specimen__desc">"Leading" (rhymes with sledding) is line spacing. Body text wants ~1.5–1.7; headings tighter (~1.1–1.2). Vertical rhythm means margins between blocks are multiples of one base unit, so the page feels evenly paced.</p>
           <div class="specimen__demo"><div class="rhythm" style="max-width:52ch"><h4>Tight heading leading (1.15)</h4><p class="small">Body leading around 1.6 lets the eye track lines comfortably. Spacing between paragraphs equals one line of text — that's rhythm.</p><p class="small" style="margin:0">Headings get less space below than above so they visually attach to what follows (proximity).</p></div></div>
           <p class="specimen__use"><strong>Use when:</strong> always. It's the difference between "off" and "polished" that nobody can name.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>body { line-height: 1.6; }  h1,h2,h3 { line-height: 1.15; }
-p { margin: 0 0 1em; }  h2 { margin: 2em 0 .5em; }  /* more above, less below */</code></pre></details>
         </article>
 
         <article class="specimen" id="dropcap" data-terms="first letter initial editorial">
@@ -401,8 +325,6 @@ p { margin: 0 0 1em; }  h2 { margin: 2em 0 .5em; }  /* more above, less below */
           <p class="specimen__desc">An enlarged first letter that drops into the paragraph. Editorial flourish signalling "long-form starts here."</p>
           <div class="specimen__demo"><p class="dropcap serif" style="max-width:52ch;margin:0">Once upon a time, before flexbox and grid, developers floated everything and cleared their fixes with a prayer. The drop cap is one float that still earns its keep.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> essays, magazine-style articles. Once per piece, never in UI.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>p::first-letter { float: left; font-size: 3.4em; line-height: .85; padding-right: .12em; }
-/* modern: initial-letter: 3; (Safari/Chrome) */</code></pre></details>
         </article>
 
         <article class="specimen" id="pullquote" data-terms="blockquote callout editorial">
@@ -410,7 +332,6 @@ p { margin: 0 0 1em; }  h2 { margin: 2em 0 .5em; }  /* more above, less below */
           <p class="specimen__desc">A striking line repeated from the article at larger size to break up long text and lure skimmers. Different from a blockquote, which introduces <em>new</em> quoted material.</p>
           <div class="specimen__demo"><blockquote class="pullquote">"Good typography is invisible; bad typography is everywhere."<footer>— an oft-repeated maxim</footer></blockquote></div>
           <p class="specimen__use"><strong>Use when:</strong> long articles, testimonials, case studies.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.pullquote { font-family: serif; font-size: 1.6rem; border-block: 2px solid var(--accent); padding: 1rem 0; text-wrap: balance; }</code></pre></details>
         </article>
 
         <article class="specimen" id="truncation" data-terms="ellipsis line-clamp overflow text">
@@ -418,8 +339,6 @@ p { margin: 0 0 1em; }  h2 { margin: 2em 0 .5em; }  /* more above, less below */
           <p class="specimen__desc">Cutting text with "…" — single-line via <code>text-overflow</code>, multi-line via <code>-webkit-line-clamp</code>. Always give a way to see the full text (title attribute, expand, or detail page).</p>
           <div class="specimen__demo"><p class="truncate small" title="Single-line truncation keeps table cells and card titles tidy">Single-line truncation keeps table cells and card titles tidy and prevents overflow</p><p class="clamp small" style="margin:0">Multi-line clamp cuts after N lines. This paragraph is intentionally long so that it overflows the two-line limit and gets an ellipsis at the end of the second line, demonstrating the effect.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> cards, tables, previews with fixed heights.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }</code></pre></details>
         </article>
 
         <article class="specimen" id="type-details" data-terms="tabular nums balance pretty ligatures small caps">
@@ -427,9 +346,6 @@ p { margin: 0 0 1em; }  h2 { margin: 2em 0 .5em; }  /* more above, less below */
           <p class="specimen__desc">Small settings that separate careful from careless: <b>tabular numerals</b> so digits align in columns; <b>text-wrap: balance</b> so headings don't leave one lonely word (an "orphan"); <b>letter-spacing</b> for uppercase.</p>
           <div class="specimen__demo"><div class="row" style="gap:var(--s-6);align-items:flex-start"><div><p class="small muted" style="margin:0 0 .3rem">proportional (misaligned)</p><div class="mono small">1,111.11<br>8,888.88<br>4,040.40</div></div><div><p class="small muted" style="margin:0 0 .3rem">tabular-nums (aligned)</p><div class="tnum small">1,111.11<br>8,888.88<br>4,040.40</div></div><div style="max-width:200px"><p class="small muted" style="margin:0 0 .3rem">text-wrap: balance</p><h4 style="margin:0;font-size:var(--fs-1)">Balanced headings avoid a lonely last word</h4></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> tables/stats (tabular), all headings (balance), uppercase labels (letter-spacing .05–.12em).</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.tnum { font-variant-numeric: tabular-nums; }
-h1, h2, h3 { text-wrap: balance; }   p { text-wrap: pretty; }
-.label { text-transform: uppercase; letter-spacing: .08em; }</code></pre></details>
         </article>
       </section>
 
@@ -448,8 +364,6 @@ h1, h2, h3 { text-wrap: balance; }   p { text-wrap: pretty; }
             <dialog class="modal" id="demoModal" aria-labelledby="modalTitle"><div class="modal__body"><h4 id="modalTitle">Delete 3 items?</h4><p class="muted small" style="margin:0">This can't be undone. Notice the dimmed backdrop, focus inside the dialog, and that Esc closes it.</p></div><div class="modal__actions"><button class="btn btn--secondary" data-close>Cancel</button><button class="btn btn--danger" data-close>Delete</button></div></dialog>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> destructive confirmations, short focused forms. Not for content that could be a page.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;dialog&gt;…&lt;/dialog&gt;   dialog.showModal();  dialog.close();
-dialog::backdrop { background: rgb(0 0 0 / .45); }</code></pre></details>
         </article>
 
         <article class="specimen" id="toast" data-terms="snackbar notification transient message">
@@ -457,8 +371,6 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }</code></pre></details>
           <p class="specimen__desc">A brief, non-blocking message that appears at an edge and dismisses itself. A <em>snackbar</em> (Material term) is a toast with one optional action, like "Undo". Should live in an <code>aria-live</code> region so screen readers announce it.</p>
           <div class="specimen__demo"><div class="row"><button class="btn btn--secondary" data-toast="Saved changes">Show toast</button><button class="btn btn--secondary" data-toast="Item archived" data-toast-action="Undo">Snackbar with action</button></div></div>
           <p class="specimen__use"><strong>Use when:</strong> confirming background actions (saved, sent, copied). Not for errors that need attention.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;div class="toast-region" aria-live="polite"&gt;&lt;/div&gt;
-/* JS: append .toast, setTimeout → add .is-leaving → remove on animationend */</code></pre></details>
         </article>
 
         <article class="specimen" id="tooltip" data-terms="hint hover title label">
@@ -466,8 +378,6 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }</code></pre></details>
           <p class="specimen__desc">A tiny label on hover/focus that explains an element. Never put essential info only in a tooltip (no hover on touch). Show on focus too, for keyboard users.</p>
           <div class="specimen__demo"><p style="margin:0">Hover or tab to <span class="tip" tabindex="0" data-tip="A tooltip! Pure CSS via attr()">this term</span> or <span class="tip" tabindex="0" data-tip="Keyboard-focusable too">this one</span>.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> icon-only buttons, abbreviations, tiny clarifications.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.tip::after { content: attr(data-tip); position: absolute; bottom: 100%; opacity: 0; }
-.tip:hover::after, .tip:focus-visible::after { opacity: 1; }</code></pre></details>
         </article>
 
         <article class="specimen" id="popover" data-terms="popover api anchored panel non-modal">
@@ -475,8 +385,6 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }</code></pre></details>
           <p class="specimen__desc">Richer than a tooltip, lighter than a modal: an anchored panel with interactive content that closes on outside click ("light dismiss"). The native Popover API handles it with zero JS.</p>
           <div class="specimen__demo" style="min-height:170px"><div class="pop-anchor"><button class="btn btn--secondary" popovertarget="pop1">Share ▾</button><div popover id="pop1" class="pop"><h4 style="font-size:var(--fs-0);margin-bottom:.4rem">Share this specimen</h4><p class="small muted" style="margin:0 0 .6rem">Native <code>[popover]</code> — no JS. Click outside to dismiss.</p><div class="row"><button class="btn btn--sm">Copy link</button><button class="btn btn--sm btn--secondary">Email</button></div></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> share menus, filter panels, date pickers, "more info" cards.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;button popovertarget="p"&gt;Share&lt;/button&gt;
-&lt;div popover id="p"&gt;…&lt;/div&gt;   /* :popover-open, light dismiss, top layer — all built in */</code></pre></details>
         </article>
 
         <article class="specimen" id="accordion" data-terms="details summary disclosure collapse expand faq">
@@ -484,8 +392,6 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }</code></pre></details>
           <p class="specimen__desc">A <em>disclosure</em> is one show/hide toggle; an <em>accordion</em> is a stack of them. Native <code>&lt;details&gt;/&lt;summary&gt;</code> works without JS; the <code>name</code> attribute makes them exclusive (open one, others close).</p>
           <div class="specimen__demo"><div class="acc"><details name="faq" open><summary>What's the difference from tabs?</summary><div>Accordions stack vertically and can show several panels at once; tabs show one panel in a fixed area.</div></details><details name="faq"><summary>Is it accessible?</summary><div>Native details/summary is keyboard-operable and announced correctly. Style the summary, hide the default marker.</div></details><details name="faq"><summary>Can it animate?</summary><div>Yes — see "Animate Height" in the Motion section, or use <code>interpolate-size: allow-keywords</code> in new browsers.</div></details></div></div>
           <p class="specimen__use"><strong>Use when:</strong> FAQs, settings groups, long forms — progressive disclosure of secondary detail.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;details name="faq"&gt;&lt;summary&gt;Question&lt;/summary&gt;&lt;div&gt;Answer&lt;/div&gt;&lt;/details&gt;
-summary::after { content: "+"; }  details[open] summary::after { transform: rotate(45deg); }</code></pre></details>
         </article>
 
         <article class="specimen" id="skeleton" data-terms="loading placeholder shimmer">
@@ -493,8 +399,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc">Grey shapes in the layout of the content that's coming, often with a shimmer sweep. Feels faster than a spinner because the page's structure is already visible.</p>
           <div class="specimen__demo"><div class="skeleton" style="max-width:360px"><div class="sk sk--avatar"></div><div><div class="sk sk--line" style="width:60%"></div><div class="sk sk--line"></div><div class="sk sk--line" style="width:85%;margin:0"></div></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> loading lists, cards, profiles — anything with predictable shape.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.sk { background: linear-gradient(90deg, #eee 25%, #ddd 37%, #eee 63%); background-size: 400% 100%; animation: shimmer 1.4s infinite; }
-@keyframes shimmer { from { background-position: 100% 0 } to { background-position: 0 0 } }</code></pre></details>
         </article>
 
         <article class="specimen" id="loaders" data-terms="spinner progress bar indeterminate loading button">
@@ -502,8 +406,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc"><em>Determinate</em> progress shows how much is done; <em>indeterminate</em> just says "working". A <em>loading button</em> swaps its label for a spinner and disables itself to prevent double-submits.</p>
           <div class="specimen__demo"><div class="row" style="gap:var(--s-6)"><div class="spinner" role="status" aria-label="Loading"></div><div class="dots" aria-hidden="true"><span></span><span></span><span></span></div><button class="btn" id="loadBtn">Save</button></div><div class="mt-4" style="max-width:320px"><p class="small muted" style="margin:0 0 .3rem">determinate</p><div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><i id="progBar"></i></div><p class="small muted" style="margin:.8rem 0 .3rem">indeterminate</p><div class="progress progress--indeterminate"><i></i></div></div><button class="btn btn--sm btn--tertiary mt-4" id="progBtn">Run progress</button></div>
           <p class="specimen__use"><strong>Use when:</strong> spinner for &lt;1–2s waits, skeleton for content, progress bar for uploads/multi-step jobs.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.spinner { border: 3px solid #ddd; border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
-.btn.is-loading { color: transparent; }  .btn.is-loading::after { /* spinner */ }</code></pre></details>
         </article>
 
         <article class="specimen" id="empty-state" data-terms="zero data blank slate first run">
@@ -511,7 +413,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc">What shows when there's no data yet. A blank list feels broken; a good empty state explains what will appear here and offers the first action.</p>
           <div class="specimen__demo"><div class="empty"><div class="empty__icon">📭</div><h4>No projects yet</h4><p>Projects you create will show up here. Start with a template or from scratch.</p><button class="btn btn--sm">Create project</button></div></div>
           <p class="specimen__use"><strong>Use when:</strong> any list, inbox, search-with-no-results, dashboard before data.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>/* icon + short headline + one sentence + primary action, centered in a dashed frame */</code></pre></details>
         </article>
 
         <article class="specimen" id="badges" data-terms="pill status label chip tag counter notification dot">
@@ -519,8 +420,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc"><b>Badge</b>: small non-interactive status label. <b>Chip</b>: interactive — selectable or removable (with an ×). <b>Tag</b>: a chip used for categorization. <b>Counter badge</b>: a number on an icon. Colors carry meaning: green success, amber warning, red danger, blue info.</p>
           <div class="specimen__demo"><div class="row" style="margin-bottom:var(--s-4)"><span class="badge">Default</span><span class="badge badge--success badge--dot">Active</span><span class="badge badge--warning badge--dot">Pending</span><span class="badge badge--danger badge--dot">Failed</span><span class="badge badge--info">New</span></div><div class="row" style="margin-bottom:var(--s-4)"><span class="chip">React <button aria-label="Remove React">×</button></span><span class="chip is-selected">CSS <button aria-label="Remove CSS">×</button></span><span class="chip">Design <button aria-label="Remove Design">×</button></span></div><div class="row" style="gap:var(--s-6)"><span class="count"><button class="icon-btn" aria-label="Notifications, 3 unread">🔔</button><span class="count__n">3</span></span><span class="count"><button class="icon-btn" aria-label="Inbox, 12 unread">✉</button><span class="count__n">12</span></span></div></div>
           <p class="specimen__use"><strong>Use when:</strong> status in tables, filters (chips), categories (tags), unread counts.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.badge { padding: .15em .6em; border-radius: 999px; font-size: .75rem; font-weight: 600; }
-.badge--success { background: color-mix(in srgb, var(--success) 15%, transparent); color: var(--success); }</code></pre></details>
         </article>
 
         <article class="specimen" id="alerts" data-terms="callout notice banner inline message warning error success">
@@ -528,8 +427,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc">Persistent inline messages (unlike toasts). Color + icon + a bold lead line. A <b>banner</b> is a full-width alert at the top of the page for site-wide notices ("cookie notice", "new version available").</p>
           <div class="specimen__demo"><div class="stack" style="--stack-space:.6rem"><div class="alert alert--info">ℹ️<div><strong>Heads up</strong>Your trial ends in 3 days.</div><button class="alert__close" aria-label="Dismiss">×</button></div><div class="alert alert--success">✅<div><strong>Deployed</strong>Build #412 is live.</div></div><div class="alert alert--warning">⚠️<div><strong>Unsaved changes</strong>You'll lose edits if you leave.</div></div><div class="alert alert--danger">⛔<div><strong>Payment failed</strong>Update your card to continue.</div></div><div class="banner">🎉 Version 2.0 is out — new grid tools and dark mode.<button class="btn btn--sm">See what's new</button></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> form-level errors, system status, onboarding tips.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.alert { display: flex; gap: .75rem; border: 1px solid; border-radius: 10px; padding: .8rem 1rem; }
-.alert--warning { border-color: var(--warning); background: color-mix(in srgb, var(--warning) 10%, transparent); }</code></pre></details>
         </article>
       </section>
 
@@ -546,10 +443,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc">One <b>primary</b> button per view (the main CTA — call to action). <b>Secondary</b> for alternatives, <b>tertiary/ghost</b> for low-emphasis, <b>destructive</b> in red for irreversible actions. Sizes come from a small set.</p>
           <div class="specimen__demo"><div class="row"><button class="btn">Primary</button><button class="btn btn--secondary">Secondary</button><button class="btn btn--tertiary">Tertiary</button><button class="btn btn--danger">Destructive</button><button class="btn" disabled>Disabled</button><button class="btn btn--sm">Small</button></div></div>
           <p class="specimen__use"><strong>Use when:</strong> always. If everything is a primary button, nothing is.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.btn { background: var(--accent); color: var(--accent-ink); }
-.btn--secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
-.btn--tertiary { background: transparent; color: var(--accent); }
-.btn:active { transform: scale(.97); }  /* micro-interaction */</code></pre></details>
         </article>
 
         <article class="specimen" id="input-states" data-terms="default hover focus error disabled ring">
@@ -557,9 +450,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc">Each state gets a distinct border/ring. The <b>focus ring</b> is non-negotiable for keyboard users. Errors pair a red border with a text message — color alone is not enough.</p>
           <div class="specimen__demo"><div class="states"><div class="field"><label>Default</label><input class="input" placeholder="Type here"></div><div class="field"><label>Hover</label><input class="input mock-hover" placeholder="Hovered"></div><div class="field"><label>Focus</label><input class="input mock-focus" placeholder="Focused ring"></div><div class="field is-invalid"><label>Invalid</label><input class="input" aria-invalid="true" value="not-an-email"><span class="error">Enter a valid email address.</span></div><div class="field"><label>Disabled</label><input class="input" disabled value="Read only"></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> every text input, select, textarea.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); outline: none; }
-.input[aria-invalid="true"] { border-color: var(--danger); }
-.input:disabled { background: var(--surface-2); cursor: not-allowed; }</code></pre></details>
         </article>
 
         <article class="specimen" id="floating-label" data-terms="material label animate placeholder">
@@ -567,8 +457,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc">The label sits inside the field as a placeholder, then floats up when the field is focused or filled. Saves vertical space; make sure the floated label stays readable.</p>
           <div class="specimen__demo"><div class="float"><input class="input" id="fl1" placeholder=" "><label for="fl1">Email address</label></div></div>
           <p class="specimen__use"><strong>Use when:</strong> compact forms (login, checkout). Plain top labels are still the safest default.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;input placeholder=" "&gt;&lt;label&gt;   /* placeholder must be a space */
-.input:focus + label, .input:not(:placeholder-shown) + label { top: .3rem; font-size: .7rem; }</code></pre></details>
         </article>
 
         <article class="specimen" id="inline-validation" data-terms="live validation password strength meter">
@@ -576,8 +464,6 @@ summary::after { content: "+"; }  details[open] summary::after { transform: rota
           <p class="specimen__desc">Check input as the user types or on blur, and show the result right next to the field. Validate <em>after</em> they leave the field, not on the first keystroke (avoid "premature error"). A strength meter is inline validation for passwords.</p>
           <div class="specimen__demo"><div class="stack" style="--stack-space:1rem"><div class="field" id="emailField"><label for="emailIn">Email (validates on blur)</label><input class="input" id="emailIn" type="email" placeholder="you@example.com"><span class="error">That doesn't look like an email.</span></div><div class="field"><label for="pwIn">Password (live strength)</label><input class="input" id="pwIn" type="password" placeholder="Try typing…"><div class="pw-meter" id="pwMeter" data-score="0"><i></i><i></i><i></i><i></i></div><span class="hint" id="pwHint">8+ chars, mixed case, a number, a symbol</span></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> sign-up, anything with format rules.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>input.addEventListener("blur", () => field.classList.toggle("is-invalid", !input.checkValidity()));
-input.setAttribute("aria-invalid", !valid);</code></pre></details>
         </article>
 
         <article class="specimen" id="toggle" data-terms="switch checkbox on off boolean">
@@ -585,9 +471,6 @@ input.setAttribute("aria-invalid", !valid);</code></pre></details>
           <p class="specimen__desc">A checkbox styled as a physical switch. Use for settings that take effect <em>immediately</em>; use a checkbox when the choice is submitted with a form.</p>
           <div class="specimen__demo"><div class="stack" style="--stack-space:.75rem"><label class="switch"><input type="checkbox" role="switch" checked><span class="switch__track"></span>Email notifications</label><label class="switch"><input type="checkbox" role="switch"><span class="switch__track"></span>Public profile</label></div></div>
           <p class="specimen__use"><strong>Use when:</strong> preferences, feature flags, "dark mode".</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;label class="switch"&gt;&lt;input type="checkbox" role="switch"&gt;&lt;span class="track"&gt;&lt;/span&gt;Label&lt;/label&gt;
-input:checked + .track { background: var(--success); }
-input:checked + .track::after { transform: translateX(18px); }</code></pre></details>
         </article>
 
         <article class="specimen" id="segmented" data-terms="radio group toggle buttons view switcher">
@@ -595,9 +478,6 @@ input:checked + .track::after { transform: translateX(18px); }</code></pre></det
           <p class="specimen__desc">A radio group styled as connected buttons — pick exactly one of 2–5 options, all visible at once. iOS-native feel. Underneath it's real radio inputs, so keyboard and forms work.</p>
           <div class="specimen__demo"><div class="seg" role="radiogroup" aria-label="View"><input type="radio" name="seg" id="segA" checked><label for="segA">List</label><input type="radio" name="seg" id="segB"><label for="segB">Grid</label><input type="radio" name="seg" id="segC"><label for="segC">Map</label></div></div>
           <p class="specimen__use"><strong>Use when:</strong> view modes, short mutually-exclusive filters, billing monthly/yearly.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.seg { display: inline-flex; background: var(--surface-2); padding: 3px; border-radius: 10px; }
-.seg input { position: absolute; opacity: 0; }
-.seg input:checked + label { background: var(--surface); box-shadow: var(--shadow-1); }</code></pre></details>
         </article>
 
         <article class="specimen" id="stepper-input" data-terms="number quantity increment decrement">
@@ -605,8 +485,6 @@ input:checked + .track::after { transform: translateX(18px); }</code></pre></det
           <p class="specimen__desc">− and + buttons around a number field. Better than a bare number input on touch. Clamp to min/max and disable the button at the limit.</p>
           <div class="specimen__demo"><div class="qty"><button aria-label="Decrease" id="numDec">−</button><input type="number" id="numIn" value="1" min="1" max="9" aria-label="Quantity"><button aria-label="Increase" id="numInc">+</button></div></div>
           <p class="specimen__use"><strong>Use when:</strong> cart quantities, small integer settings.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>dec.onclick = () => input.stepDown();  inc.onclick = () => input.stepUp();
-/* then update disabled state against min/max */</code></pre></details>
         </article>
 
         <article class="specimen" id="range" data-terms="slider output value">
@@ -614,8 +492,6 @@ input:checked + .track::after { transform: translateX(18px); }</code></pre></det
           <p class="specimen__desc">A slider whose current value is shown live in an <code>&lt;output&gt;</code>. Sliders are for approximate values; if precision matters, pair with a number input.</p>
           <div class="specimen__demo"><div class="range-row"><label for="rng" class="small">Volume</label><input type="range" id="rng" min="0" max="100" value="40"><output for="rng" id="rngOut">40</output></div></div>
           <p class="specimen__use"><strong>Use when:</strong> volume, brightness, price ranges, opacity.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;input type="range" oninput="out.value = this.value"&gt;&lt;output id="out"&gt;
-input[type=range] { accent-color: var(--accent); }</code></pre></details>
         </article>
 
         <article class="specimen" id="combobox" data-terms="autocomplete typeahead search suggestions">
@@ -623,9 +499,6 @@ input[type=range] { accent-color: var(--accent); }</code></pre></details>
           <p class="specimen__desc">A text input that shows filtered suggestions as you type; arrow keys move through them, Enter picks. Matching text is highlighted. Type a country:</p>
           <div class="specimen__demo" style="min-height:220px"><div class="combo"><input class="input" id="comboIn" role="combobox" aria-expanded="false" aria-controls="comboList" aria-autocomplete="list" placeholder="Search countries…"><ul id="comboList" role="listbox" hidden></ul></div></div>
           <p class="specimen__use"><strong>Use when:</strong> long option lists (countries, users, tags), site search.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>&lt;input role="combobox" aria-expanded aria-controls="list" aria-autocomplete="list"&gt;
-&lt;ul role="listbox"&gt;&lt;li role="option" aria-selected&gt;
-/* JS: filter on input; ArrowUp/Down move aria-selected; Enter commits; Escape closes */</code></pre></details>
         </article>
 
         <article class="specimen" id="checks" data-terms="checkbox radio native accent-color">
@@ -633,7 +506,6 @@ input[type=range] { accent-color: var(--accent); }</code></pre></details>
           <p class="specimen__desc">You rarely need custom checkboxes anymore: <code>accent-color</code> themes the native ones. Checkbox = many-of; radio = one-of. Labels must be clickable (wrap or <code>for=</code>).</p>
           <div class="specimen__demo"><div class="row" style="gap:var(--s-7);align-items:flex-start"><div class="checks"><label><input type="checkbox" checked>Newsletter</label><label><input type="checkbox">Product updates</label><label><input type="checkbox">Partner offers</label></div><div class="checks"><label><input type="radio" name="plan" checked>Monthly</label><label><input type="radio" name="plan">Yearly (save 20%)</label></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> any multi/single choice with ≤7 visible options; beyond that use a select or combobox.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>input[type=checkbox], input[type=radio] { accent-color: var(--accent); width: 18px; height: 18px; }</code></pre></details>
         </article>
       </section>
 
@@ -650,10 +522,6 @@ input[type=range] { accent-color: var(--accent); }</code></pre></details>
           <p class="specimen__desc">Tiny responses to input that confirm "the thing registered". Press: scale down 2–3%. Hover on cards: lift 2–4px + deeper shadow. Ripple: Material's radial pulse from the tap point. Underline that grows on hover.</p>
           <div class="specimen__demo"><div class="row" style="gap:var(--s-5);align-items:stretch"><button class="btn">Press me (scale)</button><button class="btn ripple-btn" id="rippleBtn">Ripple</button><div class="lift small" style="display:grid;place-items:center;padding:.6rem 1rem">Hover lift</div><a href="#micro" class="hover-underline" style="align-self:center;color:var(--text)">Animated underline</a></div></div>
           <p class="specimen__use"><strong>Use when:</strong> every interactive element gets at least a hover and press state.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.btn:active { transform: scale(.97); }
-.lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-3); }
-.hover-underline { background: linear-gradient(currentColor,currentColor) no-repeat 0 100%/0 2px; }
-.hover-underline:hover { background-size: 100% 2px; }</code></pre></details>
         </article>
 
         <article class="specimen" id="easing" data-terms="cubic-bezier timing function ease-out spring linear">
@@ -661,9 +529,6 @@ input[type=range] { accent-color: var(--accent); }</code></pre></details>
           <p class="specimen__desc">Real objects don't move at constant speed. <b>ease-out</b> (fast start, gentle stop) is the default for things entering; <b>ease-in-out</b> for things moving between places; <b>linear</b> only for continuous motion like spinners. Overshoot curves feel "springy". Click play and compare.</p>
           <div class="specimen__demo"><div class="ease-lab" id="easeLab"><div class="track t-linear"><i></i><span>linear</span></div><div class="track t-ease"><i></i><span>ease (default)</span></div><div class="track t-out"><i></i><span>ease-out · cubic-bezier(.16,1,.3,1)</span></div><div class="track t-inout"><i></i><span>ease-in-out · cubic-bezier(.65,0,.35,1)</span></div><div class="track t-spring"><i></i><span>overshoot · cubic-bezier(.34,1.56,.64,1)</span></div></div><button class="btn btn--sm btn--secondary mt-4" id="easeBtn">▶ Play</button></div>
           <p class="specimen__use"><strong>Use when:</strong> always pick a curve deliberately; ease-out for 80% of UI motion.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>--ease-out: cubic-bezier(.16, 1, .3, 1);
---ease-in-out: cubic-bezier(.65, 0, .35, 1);
-.el { transition: transform 300ms var(--ease-out); }</code></pre></details>
         </article>
 
         <article class="specimen" id="stagger" data-terms="staggered animation delay sequence cascade">
@@ -671,8 +536,6 @@ input[type=range] { accent-color: var(--accent); }</code></pre></details>
           <p class="specimen__desc">Siblings animate in one after another with a small delay (40–80ms each). Turns a list popping in all at once into something that reads as orderly. Keep total under ~500ms.</p>
           <div class="specimen__demo"><div class="stagger" id="staggerRow"><i></i><i></i><i></i><i></i><i></i><i></i></div><button class="btn btn--sm btn--secondary mt-4" id="staggerBtn">↻ Replay</button></div>
           <p class="specimen__use"><strong>Use when:</strong> lists, grids, menus appearing.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.item:nth-child(n) { animation-delay: calc(60ms * (n - 1)); }
-/* or set style="--i: n" and use animation-delay: calc(var(--i) * 60ms) */</code></pre></details>
         </article>
 
         <article class="specimen" id="scroll-reveal" data-terms="intersection observer fade in on scroll aos">
@@ -680,9 +543,6 @@ input[type=range] { accent-color: var(--accent); }</code></pre></details>
           <p class="specimen__desc">Elements fade/slide in the first time they enter the viewport. Use <code>IntersectionObserver</code>, add a class once, and never re-hide (re-animating on scroll-up is annoying). These three cards animated when you scrolled here.</p>
           <div class="specimen__demo"><div class="reveal-grid"><div class="reveal box box--tall">1</div><div class="reveal box box--tall">2</div><div class="reveal box box--tall">3</div></div><button class="btn btn--sm btn--secondary mt-4" id="revealBtn">↻ Replay</button></div>
           <p class="specimen__use"><strong>Use when:</strong> marketing pages, portfolios. Sparingly — content should never be invisible if JS fails (this site sets the class on load as a fallback).</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.reveal { opacity: 0; transform: translateY(18px); transition: .5s var(--ease-out); }
-.reveal.is-visible { opacity: 1; transform: none; }
-new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); } }), { threshold: .2 })</code></pre></details>
         </article>
 
         <article class="specimen" id="parallax" data-terms="depth scroll speed layers">
@@ -690,8 +550,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Background moves slower than foreground, creating depth. Scroll inside the box. Pure-CSS version uses <code>perspective</code> + <code>translateZ</code>. Overused in 2013; today use it subtly and never on essential content.</p>
           <div class="specimen__demo is-flush"><div class="parallax"><div class="parallax__bg"></div><div class="parallax__fg"><div class="box">foreground scrolls at 1×,<br>stripes behind at ~0.5×</div></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> hero backgrounds, storytelling pages. Disable under <code>prefers-reduced-motion</code>.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.scene { perspective: 1px; overflow-y: auto; transform-style: preserve-3d; }
-.bg { transform: translateZ(-1px) scale(2); }  /* half speed */</code></pre></details>
         </article>
 
         <article class="specimen" id="flip" data-terms="3d card flip rotate backface">
@@ -699,9 +557,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">A rotateY transform with <code>backface-visibility: hidden</code> so each face only shows when facing you. Click the card.</p>
           <div class="specimen__demo"><div class="flip" id="flipCard" tabindex="0" role="button" aria-pressed="false"><div class="flip__inner"><div class="flip__face flip__front">Front — click</div><div class="flip__face flip__back">Back!</div></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> flashcards, reveal-on-interaction tiles, playful team cards.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.flip { perspective: 800px; }  .inner { transform-style: preserve-3d; transition: transform .5s; }
-.face { position: absolute; inset: 0; backface-visibility: hidden; }  .back { transform: rotateY(180deg); }
-.is-flipped .inner { transform: rotateY(180deg); }</code></pre></details>
         </article>
 
         <article class="specimen" id="animate-height" data-terms="expand collapse grid-template-rows auto height transition">
@@ -709,8 +564,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">You can't transition <code>height: auto</code> — but you can transition <code>grid-template-rows</code> from <code>0fr</code> to <code>1fr</code>. The classic trick for smooth accordions.</p>
           <div class="specimen__demo"><button class="btn btn--sm btn--secondary" id="heightBtn" aria-expanded="false">Toggle details</button><div class="animate-height mt-2" id="heightPanel"><div><p class="small muted" style="margin:.5rem 0 0">This panel grows to fit its content, however tall that turns out to be. The trick: wrap the content in a grid whose single row goes from 0fr to 1fr, and give the child overflow: hidden. New browsers can also do <code>interpolate-size: allow-keywords</code>.</p></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> accordions, "show more", expanding cards.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s; }
-.wrap.is-open { grid-template-rows: 1fr; }   .wrap > div { overflow: hidden; }</code></pre></details>
         </article>
 
         <article class="specimen" id="marquee" data-terms="ticker infinite scroll logos loop">
@@ -718,9 +571,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Content scrolls continuously in a loop, faded at the edges with a mask. Content is duplicated so the loop is seamless. Pauses on hover. Common for "trusted by" logo strips.</p>
           <div class="specimen__demo is-flush"><div class="marquee" style="padding:var(--s-4) 0"><div class="marquee__inner" aria-hidden="true"><span class="badge">Acme</span><span class="badge">Globex</span><span class="badge">Initech</span><span class="badge">Umbrella</span><span class="badge">Hooli</span><span class="badge">Vandelay</span><span class="badge">Acme</span><span class="badge">Globex</span><span class="badge">Initech</span><span class="badge">Umbrella</span><span class="badge">Hooli</span><span class="badge">Vandelay</span></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> logo walls, announcement tickers. Must respect reduced-motion.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-.inner { display: inline-flex; animation: marquee 14s linear infinite; }  /* content duplicated once */
-@keyframes marquee { to { transform: translateX(-50%); } }</code></pre></details>
         </article>
 
         <article class="specimen" id="reduced-motion" data-terms="accessibility vestibular prefers-reduced-motion">
@@ -728,9 +578,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Some people get dizzy or nauseous from motion (vestibular disorders). The OS exposes a preference; honor it by shrinking durations to near-zero. This whole site does — enable "Reduce motion" in your OS accessibility settings and reload.</p>
           <div class="specimen__demo"><p class="small" style="margin:0" id="rmStatus">Checking your setting…</p></div>
           <p class="specimen__use"><strong>Use when:</strong> always. A single global rule covers most cases.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-}</code></pre></details>
         </article>
       </section>
 
@@ -747,19 +594,13 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Named values — colors, spacing, radii, shadows, type sizes — defined once and referenced everywhere. Change the token, change the site. Dark mode is just a second set of values for the same names. Toggle the theme (◐ top-right) and watch every specimen follow.</p>
           <div class="specimen__demo"><div class="tokens-demo"><div><i style="background:var(--bg)"></i>--bg</div><div><i style="background:var(--surface)"></i>--surface</div><div><i style="background:var(--surface-2)"></i>--surface-2</div><div><i style="background:var(--text)"></i>--text</div><div><i style="background:var(--muted)"></i>--muted</div><div><i style="background:var(--accent)"></i>--accent</div><div><i style="background:var(--accent-soft)"></i>--accent-soft</div><div><i style="background:var(--success)"></i>--success</div><div><i style="background:var(--warning)"></i>--warning</div><div><i style="background:var(--danger)"></i>--danger</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> from the first line of CSS on any project.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>:root { --bg: #f6f5f2; --text: #1b1a17; --accent: #b3411f; }
-[data-theme="dark"] { --bg: #15161a; --text: #ebe9e3; --accent: #e0754f; }
-.card { background: var(--surface); color: var(--text); }</code></pre></details>
         </article>
 
         <article class="specimen" id="dark-mode" data-terms="theme color-scheme light dark toggle">
           <div class="specimen__head"><h3>Dark Mode</h3><p class="specimen__aka">color scheme, theme switching</p><span class="tag">Style</span></div>
-          <p class="specimen__desc">Not just inverted colors: dark surfaces get <em>lighter</em> as they rise (elevation = lighter, not shadowed), pure black and pure white are avoided (use #15161a / #ebe9e3), accents get slightly desaturated and brighter, shadows get stronger. Follow the OS by default, let users override, remember the choice.</p>
+          <p class="specimen__desc">Not just inverted colors: dark surfaces get <em>lighter</em> as they rise (elevation = lighter, not shadowed), pure black and pure white are avoided (use #15161a / #ebe9e3), accents get slightly desaturated and brighter, shadows get stronger. Follow the OS by default, let users override, remember the choice — and apply the saved theme <em>before first paint</em> to avoid a flash of the wrong theme.</p>
           <div class="specimen__demo"><div class="dark-preview"><div class="l"><strong>Light</strong><br>bg #f6f5f2 · text #1b1a17<br>surfaces sit on shadows</div><div class="d"><strong>Dark</strong><br>bg #15161a · text #ebe9e3<br>surfaces get lighter as they rise</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> most products now — users expect it; reading apps and dev tools especially.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>@media (prefers-color-scheme: dark) { :root:not([data-theme=light]) { /* dark tokens */ } }
-:root[data-theme=dark] { /* dark tokens */ }
-/* toggle: html.dataset.theme = next; localStorage.setItem("theme", next); apply before paint in &lt;head&gt; */</code></pre></details>
         </article>
 
         <article class="specimen" id="elevation" data-terms="shadow depth z-axis layers box-shadow">
@@ -767,7 +608,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">A small ladder of shadows signals how far something floats: cards low, dropdowns mid, modals high. Good shadows are layered (two or three stacked), soft, and low-opacity — never one hard dark blob.</p>
           <div class="specimen__demo"><div class="swatches"><div class="swatch" style="box-shadow:var(--shadow-1)">--shadow-1<br>card</div><div class="swatch" style="box-shadow:var(--shadow-2)">--shadow-2<br>raised</div><div class="swatch" style="box-shadow:var(--shadow-3)">--shadow-3<br>dropdown</div><div class="swatch" style="box-shadow:var(--shadow-4)">--shadow-4<br>modal</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> anything that overlaps something else. Consistent = believable.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>--shadow-3: 0 8px 24px rgb(0 0 0 / .10), 0 2px 6px rgb(0 0 0 / .06);  /* two layers: ambient + key */</code></pre></details>
         </article>
 
         <article class="specimen" id="radius" data-terms="border-radius corners rounded pill scale">
@@ -775,8 +615,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Corners set the personality: 0 = serious/brutal, 4–8px = neutral product, 12–16px = friendly, 999px = pill. Pick a scale and nest correctly — inner radius = outer radius − padding, or things look wrong.</p>
           <div class="specimen__demo"><div class="radii"><div style="border-radius:0">0</div><div style="border-radius:var(--r-1)">3px</div><div style="border-radius:var(--r-2)">6px</div><div style="border-radius:var(--r-3)">10px</div><div style="border-radius:var(--r-4)">16px</div><div style="border-radius:var(--r-pill)">pill</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> everywhere; 3–4 values plus pill is enough.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>--r-1: 3px; --r-2: 6px; --r-3: 10px; --r-4: 16px; --r-pill: 999px;
-.outer { border-radius: 16px; padding: 8px; }  .inner { border-radius: 8px; }  /* nested radius rule */</code></pre></details>
         </article>
 
         <article class="specimen" id="glassmorphism" data-terms="frosted glass blur backdrop-filter translucent">
@@ -784,7 +622,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Semi-transparent surface + <code>backdrop-filter: blur()</code> + a thin light border, over a colorful background. Popularized by macOS/iOS. Needs something colorful behind it to read as glass. Also used subtly on sticky headers (like this site's).</p>
           <div class="specimen__demo is-flush"><div class="glass-stage"><div class="glass"><h4>Frosted panel</h4><p class="small" style="margin:0;opacity:.9">Blur what's behind, tint slightly, add a 1px light edge.</p></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> overlays on imagery, sticky headers, music/media UIs. Watch text contrast.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.glass { background: rgb(255 255 255 / .18); backdrop-filter: blur(14px) saturate(1.5); border: 1px solid rgb(255 255 255 / .35); }</code></pre></details>
         </article>
 
         <article class="specimen" id="neumorphism" data-terms="soft ui extruded inset shadows">
@@ -792,8 +629,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Elements appear extruded from or pressed into a same-colored surface using a light shadow up-left and a dark shadow down-right. Striking, but has poor contrast and weak affordance — know it, use it rarely.</p>
           <div class="specimen__demo is-flush"><div class="neu-stage"><div class="neu">raised</div><div class="neu neu--in">pressed</div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> decorative dashboards, concept work. Not for anything accessibility-critical.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.neu { background: #e6e7ee; box-shadow: 8px 8px 16px #c3c4cb, -8px -8px 16px #fff; }
-.neu--in { box-shadow: inset 6px 6px 12px #c3c4cb, inset -6px -6px 12px #fff; }</code></pre></details>
         </article>
 
         <article class="specimen" id="brutalism" data-terms="neo-brutalism raw bold hard shadow mono">
@@ -801,7 +636,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Thick black borders, hard offset shadows (no blur), flat loud colors, monospace or heavy grotesque type, zero border radius. Deliberately "unpolished". Great for personality; tiring for dense apps.</p>
           <div class="specimen__demo"><div class="brutal"><h4>Loud &amp; proud</h4><p class="small" style="margin:0 0 .75rem;color:#000">3px borders. 6px hard shadow. Zero radius.</p><button class="btn btn--sm">CLICK IT</button></div></div>
           <p class="specimen__use"><strong>Use when:</strong> personal sites, indie products, editorial — where standing out beats blending in.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.brutal { border: 3px solid #000; box-shadow: 6px 6px 0 #000; border-radius: 0; background: #fff200; }</code></pre></details>
         </article>
 
         <article class="specimen" id="gradients" data-terms="gradient text mesh gradient background-clip aurora">
@@ -809,8 +643,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc"><b>Gradient text</b> clips a background to the glyphs. A <b>mesh gradient</b> layers several radial gradients into a soft, blobby wash — the 2020s hero-background look.</p>
           <div class="specimen__demo"><p class="gradient-text" style="margin:0 0 var(--s-4)">Gradient headline</p><div class="mesh"></div></div>
           <p class="specimen__use"><strong>Use when:</strong> heroes, one headline per page. Never body text.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.gtext { background: linear-gradient(90deg, #b3411f, #6b8fd8); background-clip: text; color: transparent; }
-.mesh { background: radial-gradient(at 20% 30%, #ffb199, transparent 50%), radial-gradient(at 80% 20%, #a1c4fd, transparent 50%), #f5f7fa; }</code></pre></details>
         </article>
 
         <article class="specimen" id="focus-ring" data-terms="focus-visible outline keyboard accessibility">
@@ -818,7 +650,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">The outline shown on the element that will receive keyboard input. <code>:focus-visible</code> shows it for keyboard users but not on mouse click — so there's no reason to remove it. Tab through the buttons.</p>
           <div class="specimen__demo"><div class="focus-demo"><button class="btn btn--secondary">Tab to me</button><button class="btn btn--secondary">Then me</button><button class="btn btn--secondary fake-focus" tabindex="-1">Styled ring (static)</button></div></div>
           <p class="specimen__use"><strong>Use when:</strong> always. <code>outline: none</code> without a replacement is an accessibility bug.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }</code></pre></details>
         </article>
 
         <article class="specimen" id="contrast" data-terms="wcag color contrast ratio accessibility 4.5">
@@ -826,7 +657,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Text needs enough luminance difference from its background: <b>4.5:1</b> for normal text (AA), <b>3:1</b> for large text and UI parts, <b>7:1</b> for AAA. Light grey on white is the most common failure.</p>
           <div class="specimen__demo"><div class="contrast"><span style="background:#fff;color:#1b1a17;border:1px solid #ddd">#1b1a17 on white · 17:1 ✓</span><span style="background:#fff;color:#6b675e;border:1px solid #ddd">#6b675e on white · 5.2:1 ✓ AA</span><span style="background:#fff;color:#aaa;border:1px solid #ddd">#aaa on white · 2.3:1 ✗</span><span style="background:#b3411f;color:#fff">white on accent · 6.1:1 ✓</span></div></div>
           <p class="specimen__use"><strong>Use when:</strong> choosing every text/background pair. Check with a contrast tool.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>/* no code — a rule. Muted text on this site is #6b675e (light) / #9c9a93 (dark) to stay above 4.5:1 */</code></pre></details>
         </article>
       </section>
 
@@ -843,7 +673,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">A bounded surface grouping media + title + description + actions. The whole card is clickable via a pseudo-element stretched over it ("stretched link") while keeping a real link for accessibility. Hover lift shows it's interactive.</p>
           <div class="specimen__demo"><div class="card card--clickable"><div class="card__media"></div><div class="card__body"><h4 style="font-size:var(--fs-0)"><a href="#card" style="color:inherit;text-decoration:none">Card title is the link</a></h4><p>Two lines of supporting copy, clamped. The stretched-link trick makes the whole surface clickable.</p><span class="badge">Tag</span></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> collections of similar items — products, posts, people.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.card { position: relative; }  .card a::after { content: ""; position: absolute; inset: 0; }  /* stretched link */</code></pre></details>
         </article>
 
         <article class="specimen" id="media-object" data-terms="avatar text comment row list item">
@@ -851,7 +680,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">An image/avatar on the left, text that fills the rest. Coined by Nicole Sullivan in 2010; still everywhere — every comment, notification, chat message.</p>
           <div class="specimen__demo"><div class="media-obj"><div class="avatar" style="background:#6b8fd8">JD</div><div><strong>Jordan Doe</strong> <span class="muted small">· 2h</span><p class="small" style="margin:.2rem 0 0">The media object never wraps the text under the image — that's the defining property.</p></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> comments, feeds, notification lists, contact rows.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.media { display: flex; gap: 1rem; align-items: flex-start; }  .media > img { flex-shrink: 0; }</code></pre></details>
         </article>
 
         <article class="specimen" id="table" data-terms="data table zebra sticky header sortable numeric">
@@ -859,9 +687,6 @@ new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { e
           <p class="specimen__desc">Alternate row shading (zebra) helps the eye track wide rows; sticky header keeps columns labeled while scrolling; numbers right-align with tabular figures; row hover highlights. Scroll inside. Click a header to sort.</p>
           <div class="specimen__demo is-flush"><div class="table-wrap"><table class="data" id="sortTable"><thead><tr><th data-sort="text">Name</th><th data-sort="text">Category</th><th class="num" data-sort="num">Views</th><th class="num" data-sort="num">Δ</th><th>Status</th></tr></thead><tbody><tr><td>Holy grail</td><td>Layout</td><td class="num">12,405</td><td class="num">+4.2%</td><td><span class="badge badge--success badge--dot">Live</span></td></tr><tr><td>Bento grid</td><td>Layout</td><td class="num">9,811</td><td class="num">+18.0%</td><td><span class="badge badge--success badge--dot">Live</span></td></tr><tr><td>Toast</td><td>Feedback</td><td class="num">7,203</td><td class="num">−1.1%</td><td><span class="badge badge--warning badge--dot">Review</span></td></tr><tr><td>Combobox</td><td>Forms</td><td class="num">4,090</td><td class="num">+0.4%</td><td><span class="badge badge--success badge--dot">Live</span></td></tr><tr><td>Parallax</td><td>Motion</td><td class="num">1,318</td><td class="num">−12.5%</td><td><span class="badge badge--danger badge--dot">Deprecated</span></td></tr><tr><td>Glassmorphism</td><td>Style</td><td class="num">6,554</td><td class="num">+7.9%</td><td><span class="badge badge--success badge--dot">Live</span></td></tr><tr><td>Skeleton</td><td>Feedback</td><td class="num">3,742</td><td class="num">+2.2%</td><td><span class="badge badge--success badge--dot">Live</span></td></tr></tbody></table></div></div>
           <p class="specimen__use"><strong>Use when:</strong> tabular data (comparisons, admin lists). Not for layout, ever.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>thead th { position: sticky; top: 0; background: var(--surface-2); }
-tbody tr:nth-child(even) { background: var(--surface-2); }
-td.num { text-align: right; font-variant-numeric: tabular-nums; }</code></pre></details>
         </article>
 
         <article class="specimen" id="stats" data-terms="kpi metric stat tile sparkline dashboard">
@@ -869,8 +694,6 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }</code></pre></
           <p class="specimen__desc">Label small, number big, delta colored, optional sparkline. The dashboard staple. Numbers use tabular figures so they don't wobble when they update.</p>
           <div class="specimen__demo"><div class="stat-row"><div class="stat"><div class="stat__label">Visitors</div><div class="stat__value">48.2k</div><div class="stat__delta up">▲ 12.4%</div><svg class="sparkline" viewBox="0 0 100 28" preserveAspectRatio="none"><polyline fill="none" stroke="var(--success)" stroke-width="2" points="0,22 15,18 30,20 45,12 60,14 75,8 100,4"/></svg></div><div class="stat"><div class="stat__label">Bounce rate</div><div class="stat__value">31%</div><div class="stat__delta down">▼ 2.1%</div><svg class="sparkline" viewBox="0 0 100 28" preserveAspectRatio="none"><polyline fill="none" stroke="var(--danger)" stroke-width="2" points="0,6 15,10 30,8 45,14 60,12 75,20 100,22"/></svg></div><div class="stat"><div class="stat__label">Revenue</div><div class="stat__value">$9,140</div><div class="stat__delta up">▲ 5.0%</div><svg class="sparkline" viewBox="0 0 100 28" preserveAspectRatio="none"><polyline fill="none" stroke="var(--success)" stroke-width="2" points="0,20 15,16 30,18 45,10 60,12 75,6 100,8"/></svg></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> dashboards, analytics summaries, "by the numbers" sections.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.stat__value { font-size: 1.8rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-&lt;svg viewBox="0 0 100 28" preserveAspectRatio="none"&gt;&lt;polyline points="…"/&gt;  /* sparkline */</code></pre></details>
         </article>
 
         <article class="specimen" id="timeline" data-terms="history changelog activity feed vertical">
@@ -878,8 +701,6 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }</code></pre></
           <p class="specimen__desc">Events on a vertical line with dot markers and timestamps. Chronological storytelling: order history, release notes, "our story".</p>
           <div class="specimen__demo"><ol class="timeline"><li><time>2026-08-19 09:12</time><strong>Order shipped</strong> — tracking number issued.</li><li><time>2026-08-18 16:40</time><strong>Packed</strong> at warehouse 3.</li><li><time>2026-08-18 10:05</time><strong>Order placed</strong> — payment confirmed.</li></ol></div>
           <p class="specimen__use"><strong>Use when:</strong> order tracking, audit logs, roadmaps, about pages.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.timeline { border-left: 2px solid var(--border); padding-left: 1.2rem; }
-.timeline li::before { content: ""; position: absolute; left: calc(-1.2rem - 6px); width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); }</code></pre></details>
         </article>
 
         <article class="specimen" id="avatars" data-terms="avatar stack facepile group overlap">
@@ -887,7 +708,6 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }</code></pre></
           <p class="specimen__desc">Overlapping circular avatars with a border in the surface color to separate them, ending in a "+N" overflow. Initials as fallback when there's no photo.</p>
           <div class="specimen__demo"><div class="row" style="gap:var(--s-5)"><div class="avatars"><div class="avatar" style="background:#b3411f">AK</div><div class="avatar" style="background:#6b8fd8">JD</div><div class="avatar" style="background:#2f7d4a">MR</div><div class="avatar" style="background:#b8860b">TS</div><div class="avatar avatar--more">+7</div></div><span class="small muted">11 collaborators</span></div></div>
           <p class="specimen__use"><strong>Use when:</strong> showing participants, assignees, "who's viewing".</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.avatar { border-radius: 50%; border: 2px solid var(--surface); }  .avatar + .avatar { margin-left: -10px; }</code></pre></details>
         </article>
 
         <article class="specimen" id="kanban" data-terms="board columns drag and drop trello">
@@ -895,9 +715,6 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }</code></pre></
           <p class="specimen__desc">Columns as states, cards as items, drag to move. Uses native HTML5 drag-and-drop here (<code>draggable</code>, <code>dragover</code>, <code>drop</code>). Try dragging a card.</p>
           <div class="specimen__demo"><div class="kanban" id="kanbanBoard"><div class="kanban__col"><h5>To do <span>2</span></h5><div class="kanban__card" draggable="true">Write glossary</div><div class="kanban__card" draggable="true">Add OG image</div></div><div class="kanban__col"><h5>Doing <span>1</span></h5><div class="kanban__card" draggable="true">Build kanban demo</div></div><div class="kanban__col"><h5>Done <span>1</span></h5><div class="kanban__card" draggable="true">Design tokens</div></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> task/status tracking, pipelines (sales, hiring).</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>card.addEventListener("dragstart", e => e.dataTransfer.setData("text/plain", id));
-col.addEventListener("dragover", e => e.preventDefault());   // required to allow drop
-col.addEventListener("drop", e => col.append(document.getElementById(e.dataTransfer.getData("text/plain"))));</code></pre></details>
         </article>
 
         <article class="specimen" id="pricing" data-terms="pricing table tiers featured plan">
@@ -905,7 +722,6 @@ col.addEventListener("drop", e => col.append(document.getElementById(e.dataTrans
           <p class="specimen__desc">Three tiers with the recommended one visually emphasized (bigger, colored border, "Popular" badge) — a nudge called <em>anchoring</em>. Feature lists short; CTA in every column.</p>
           <div class="specimen__demo"><div class="pricing"><div class="price"><strong>Starter</strong><div class="price__amt">$0</div><ul><li>1 project</li><li>Community support</li></ul><button class="btn btn--sm btn--secondary">Choose</button></div><div class="price is-featured"><span class="badge badge--info">Popular</span><strong>Pro</strong><div class="price__amt">$12</div><ul><li>Unlimited projects</li><li>Priority support</li></ul><button class="btn btn--sm">Choose</button></div><div class="price"><strong>Team</strong><div class="price__amt">$39</div><ul><li>Everything in Pro</li><li>SSO &amp; audit log</li></ul><button class="btn btn--sm btn--secondary">Choose</button></div></div></div>
           <p class="specimen__use"><strong>Use when:</strong> SaaS pricing pages, plan upgrade prompts.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>.price.is-featured { border-color: var(--accent); box-shadow: var(--shadow-3); transform: scale(1.03); }</code></pre></details>
         </article>
 
         <article class="specimen" id="description-list" data-terms="key value pairs metadata dl dt dd">
@@ -913,7 +729,6 @@ col.addEventListener("drop", e => col.append(document.getElementById(e.dataTrans
           <p class="specimen__desc">Term + detail pairs using semantic <code>&lt;dl&gt;</code>. Grid makes the two columns align. The right element for specs, metadata panels, and — yes — glossaries like the one below.</p>
           <div class="specimen__demo"><dl class="dl"><dt>Owner</dt><dd>Jordan Doe</dd><dt>Created</dt><dd>Aug 19, 2026</dd><dt>Status</dt><dd><span class="badge badge--success badge--dot">Active</span></dd><dt>Region</dt><dd>eu-west-1</dd></dl></div>
           <p class="specimen__use"><strong>Use when:</strong> object detail panels, product specs, invoice metadata.</p>
-          <details class="specimen__code"><summary>How it's built</summary><pre><code>dl { display: grid; grid-template-columns: max-content 1fr; gap: .4rem 1.2rem; }  dd { margin: 0; }</code></pre></details>
         </article>
       </section>
 

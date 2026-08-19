@@ -233,9 +233,6 @@ main { padding: var(--s-6) var(--s-6) var(--s-8); }
 .specimen__demo.is-flush { padding: 0; }
 .specimen__use { font-size: var(--fs--1); color: var(--muted); margin: 0 0 var(--s-3); max-width: var(--measure); }
 .specimen__use strong { color: var(--text); }
-.specimen__code { font-size: var(--fs--1); }
-.specimen__code summary { cursor: pointer; color: var(--accent); font-weight: 600; user-select: none; }
-.specimen__code[open] summary { margin-bottom: var(--s-2); }
 .tag { display: inline-block; font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; padding: .15rem .5rem; border-radius: var(--r-pill); background: var(--surface-2); color: var(--muted); }
 
 /* generic demo helpers */
