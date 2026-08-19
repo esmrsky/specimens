@@ -1,9 +1,11 @@
 # Roadmap
 
 Work queue for Specimens, in priority order. Owner's brief, captured 2026-08-19.
-The nightly routine works through this file: pick the highest-priority unchecked item,
-do it completely, verify it, commit, and check it off. Small, complete, verified passes
-beat large half-finished ones.
+
+This is meant to be **finished in one pass** — the site is close to done. Work items 1
+through 5 in order, then run the audit. Commit and push after each item so partial
+progress survives, and tick items off as they land. Quality over volume: a smaller set of
+specimens that all work beautifully beats a larger set with broken ones.
 
 ---
 
