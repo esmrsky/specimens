@@ -201,6 +201,171 @@
       </section>
 
       <!-- ================================================================ -->
+      <section class="section" id="archetypes" data-section="Page Archetypes">
+        <header>
+          <p class="section-num">02</p>
+          <h2>Page Archetypes</h2>
+          <p>How whole pages are composed, by industry. Each wireframe below is scrollable — the bands are in the order real sites in that vertical use, labeled with the job each band does. Composition, not style: any of these can be executed brutalist or corporate. Agency sites are the portfolio archetype plus a services band and a client-logo strip; medical &amp; dental take the trades skeleton and swap the quote form for a booking widget plus an insurance band; fitness adds a live class schedule and transparent pricing to the same trust frame. Learn these seven and you can compose the rest.</p>
+        </header>
+
+        <article class="specimen" id="arch-restaurant" data-terms="restaurant cafe hospitality menu reserve order hours location map website layout">
+          <div class="specimen__head"><h3>Restaurant &amp; Hospitality</h3><p class="specimen__aka">photography-led, menu-first, logistics above the fold</p><span class="tag">Archetype</span></div>
+          <p class="specimen__desc">Most visitors arrive with one question — <em>can I eat there tonight?</em> — so hours, location, and phone live at the top, not the footer, and the menu is a first-class object: real HTML with prices and dietary flags, never a PDF download. Photography carries the atmosphere; the story section sits low because it answers no transactional question. Reservations and ordering are usually embedded third-party widgets.</p>
+          <div class="specimen__demo">
+            <div class="wf" tabindex="0" aria-label="Restaurant page wireframe, scrollable">
+              <div class="wf__page">
+                <div class="wf__band wf--sticky-top"><b>Header</b><span>name · hours · phone · Reserve button — sticky</span></div>
+                <div class="wf__band wf--hero"><b>Hero</b><span>full-bleed food/interior photography + cuisine one-liner + hours &amp; address repeated</span></div>
+                <div class="wf__band wf--cta"><b>Reserve / Order</b><span>the one dominant action — booking widget or online ordering</span></div>
+                <div class="wf__band"><b>Menu</b><span>HTML, categorized, priced, allergen-flagged — the real product page</span></div>
+                <div class="wf__band wf--soft"><b>Gallery</b><span>dishes and room — appetite + setting expectations</span></div>
+                <div class="wf__band"><b>Story</b><span>chef, sourcing, history — differentiation, so it sits low</span></div>
+                <div class="wf__band wf--soft"><b>Find us</b><span>map embed · address · hours again · phone — the most-visited band on mobile</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Primary conversion:</strong> reserve a table (dine-in) or order online (fast-casual), repeated in header, hero, and after the menu. <strong>Classic mistake:</strong> burying hours, location, and the menu under a decorative hero and brand copy — or shipping the menu as a PDF.</p>
+        </article>
+
+        <article class="specimen" id="arch-trades" data-terms="plumber hvac roofing construction contractor local service trades emergency call quote lead website layout">
+          <div class="specimen__head"><h3>Local Service &amp; Trades</h3><p class="specimen__aka">plumbing / HVAC / roofing / construction — the call-first page</p><span class="tag">Archetype</span></div>
+          <p class="specimen__desc">The most conversion-driven archetype and the least written about. It runs two intents at once: an <b>emergency path</b> (burst pipe at 2am — tap-to-call, high contrast, 24/7 language) and a <b>planned-work path</b> (new roof — quote form, financing, reviews). The phone number is the product: in the top strip, the header, the hero, and a sticky bar on mobile, so a caller never has to scroll to find it. Trust is front-loaded — license number, insured, years in business, review stars — with real crew-and-truck photos, not stock. Per-city service-area pages are a first-class section, driven by local search.</p>
+          <div class="specimen__demo">
+            <div class="wf" tabindex="0" aria-label="Local trades page wireframe, scrollable">
+              <div class="wf__page">
+                <div class="wf__band wf--cta wf--sticky-top"><b>☎ 24/7 emergency</b><span>tap-to-call strip — the highest-converting element</span></div>
+                <div class="wf__band"><b>Header</b><span>logo · 4–5 links max · big clickable phone number</span></div>
+                <div class="wf__band wf--hero"><b>Hero</b><span>"AC Repair in Mesa, AZ" + ★ 4.9 reviews + Licensed &amp; Insured + two CTAs: Call now / Free quote</span></div>
+                <div class="wf__band wf--soft"><b>Trust row</b><span>license № · insured · BBB · manufacturer certs · guarantees</span></div>
+                <div class="wf__band"><b>Services</b><span>3–6 cards (repair / replace / maintain), each its own page</span></div>
+                <div class="wf__band wf--soft"><b>Reviews</b><span>embedded Google reviews with names and dates</span></div>
+                <div class="wf__band"><b>Before / after</b><span>matched-angle project gallery — the trades' portfolio</span></div>
+                <div class="wf__band wf--soft"><b>Service area</b><span>city + neighborhood list, map — feeds per-city pages</span></div>
+                <div class="wf__band"><b>Financing</b><span>prominent for big-ticket work (roof, HVAC install)</span></div>
+                <div class="wf__band wf--soft"><b>Quote form</b><span>4 fields max: name, phone, zip, issue</span></div>
+                <div class="wf__band"><b>Footer</b><span>name/address/phone exactly matching the Google Business Profile</span></div>
+                <div class="wf__band wf--cta wf--sticky-bottom"><b>☎ Call now</b><span>sticky on mobile — visible at every scroll position</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Primary conversion:</strong> the phone call — repeated at every viewport; the quote form is the secondary path for planned work. <strong>Classic mistake:</strong> a phone number that isn't visible and tappable at all times on mobile (footer-only, or not a <code>tel:</code> link), compounded by slow mobile load and long forms.</p>
+        </article>
+
+        <article class="specimen" id="arch-portfolio" data-terms="portfolio designer creative case study work project index personal site layout">
+          <div class="specimen__head"><h3>Creative Portfolio</h3><p class="specimen__aka">work-first, chrome-last</p><span class="tag">Archetype</span></div>
+          <p class="specimen__desc">Navigation and copy are minimized so the work lands within one scroll: a name-plus-positioning line in oversized type, then straight into a curated grid of three to six projects. The real signature of the vertical is the <b>case study anatomy</b>: context and problem → <em>my role, stated early</em> → only the process steps that show decision-making → outcome, with numbers if they exist. Three to five deep case studies beat twenty shallow ones. The contact action stays deliberately quiet — the page's job is getting a case study read.</p>
+          <div class="specimen__demo">
+            <div class="wf" tabindex="0" aria-label="Portfolio page wireframe, scrollable">
+              <div class="wf__page">
+                <div class="wf__band wf--hero"><b>Hero</b><span>name + one-line positioning in display type — "Product designer in Berlin, previously X"</span></div>
+                <div class="wf__band"><b>Selected work</b><span>3–6 curated projects: title, category, hover preview — the body of the page</span></div>
+                <div class="wf__band wf--soft"><b>Case study</b><span>problem → my role → decisive process moments → outcome</span></div>
+                <div class="wf__band"><b>Archive</b><span>quiet "all work" link — depth without clutter</span></div>
+                <div class="wf__band wf--soft"><b>Bio</b><span>one paragraph, photo optional</span></div>
+                <div class="wf__band wf--cta"><b>Contact</b><span>plain-text email + availability status — quiet, not shouty</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Primary conversion:</strong> the email / "available for work" contact — mentioned in the hero, end of each case study, and footer, never repeated aggressively. <strong>Classic mistake:</strong> case studies that document every process step instead of the decisions — recruiters skim; a vague "the goal was to improve the UX" with no stated outcome loses them.</p>
+        </article>
+
+        <article class="specimen" id="arch-saas" data-terms="saas landing page product marketing hero social proof pricing faq cta layout">
+          <div class="specimen__head"><h3>SaaS / Product Landing</h3><p class="specimen__aka">the argument in a fixed order</p><span class="tag">Archetype</span></div>
+          <p class="specimen__desc">The page is an argument, and the band order is the argument's logic — each section answers the next objection: what is it → who else uses it → what problem it kills → how it works → what it costs. Reordering it (features before problem, pricing before proof) breaks the argument. One conversion action rules the page; trial and demo as co-equal buttons dilute each other. The current shift: static hero screenshots giving way to embedded interactive product demos.</p>
+          <div class="specimen__demo">
+            <div class="wf" tabindex="0" aria-label="SaaS landing page wireframe, scrollable">
+              <div class="wf__page">
+                <div class="wf__band wf--sticky-top"><b>Header</b><span>logo · product · pricing · docs · the same primary CTA — sticky</span></div>
+                <div class="wf__band wf--hero"><b>Hero</b><span>one claim, under ~8 words, outcome not jargon + interactive demo or product video</span></div>
+                <div class="wf__band wf--cta"><b>Primary CTA</b><span>start free trial <em>or</em> book a demo — never both as equals</span></div>
+                <div class="wf__band wf--soft"><b>Logo strip</b><span>"who else uses this" — answered before any feature claim</span></div>
+                <div class="wf__band"><b>Problem → benefit</b><span>name the pain before the solution</span></div>
+                <div class="wf__band wf--soft"><b>Features</b><span>bento grid for complex products, alternating bands for simple ones</span></div>
+                <div class="wf__band"><b>How it works</b><span>3 steps — shrink the perceived effort</span></div>
+                <div class="wf__band wf--soft"><b>Customer evidence</b><span>named testimonials, case-study numbers, video</span></div>
+                <div class="wf__band"><b>Pricing</b><span>transparent tiers, one highlighted — transparency is itself a trust signal</span></div>
+                <div class="wf__band wf--soft"><b>FAQ</b><span>objection handling (and structured-data SEO)</span></div>
+                <div class="wf__band wf--cta"><b>Final CTA</b><span>restate the claim + the same action; nothing after but the footer</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Primary conversion:</strong> one action — trial or demo — in the header, hero, after evidence, on every pricing card, and in the closing band. <strong>Classic mistake:</strong> a vague, jargon-heavy hero plus competing CTAs; the visitor's "what do I get?" test fails in the first five seconds and no lower band matters.</p>
+        </article>
+
+        <article class="specimen" id="arch-ecom" data-terms="ecommerce shop listing plp pdp product page filters facets add to cart drawer checkout layout">
+          <div class="specimen__head"><h3>E-commerce — Listing vs Product</h3><p class="specimen__aka">PLP + PDP + cart drawer</p><span class="tag">Archetype</span></div>
+          <p class="specimen__desc">Two distinct pages doing two distinct jobs. The <b>listing page</b> is a filtering machine: facets combine as OR within a group and AND across groups, every filter value shows a live product count so no path dead-ends, and the default sort is "bestselling". The <b>product page</b> is an anxiety-reduction machine: gallery beside a buy-box, the trust row (shipping, returns, payment marks — three or four badges, more reads as desperate) directly under the add-to-cart button, reviews below. Adding to cart opens a <b>drawer</b>, not a new page — with a free-shipping progress bar at the top. On long mobile pages a sticky add-to-cart bar follows the reader down.</p>
+          <div class="specimen__demo">
+            <div class="wf-pair">
+              <div><h5>Listing (PLP)</h5>
+                <div class="wf" tabindex="0" aria-label="Product listing wireframe, scrollable" style="height:280px">
+                  <div class="wf__page">
+                    <div class="wf__band"><b>Breadcrumb</b><span>category name + product count</span></div>
+                    <div class="wf__band wf--soft"><b>Filters</b><span>facets with live counts; bottom-sheet on mobile</span></div>
+                    <div class="wf__band"><b>Applied chips</b><span>removable, one per active filter</span></div>
+                    <div class="wf__band wf--soft"><b>Sort</b><span>default: bestselling</span></div>
+                    <div class="wf__band wf--hero"><b>Product grid</b><span>image · name · price · rating count · swatches</span></div>
+                    <div class="wf__band"><b>Load more</b><span>or pagination — keep a way back to a spot</span></div>
+                  </div>
+                </div>
+              </div>
+              <div><h5>Product (PDP)</h5>
+                <div class="wf" tabindex="0" aria-label="Product detail wireframe, scrollable" style="height:280px">
+                  <div class="wf__page">
+                    <div class="wf__band wf--hero"><b>Gallery + buy box</b><span>multi-angle zoomable images · title · ★ rating link · price · variant swatches</span></div>
+                    <div class="wf__band wf--cta"><b>Add to cart</b><span>the dominant button — opens the cart drawer</span></div>
+                    <div class="wf__band wf--soft"><b>Trust row</b><span>free shipping · returns · payment marks — right under the button</span></div>
+                    <div class="wf__band"><b>Details</b><span>accordion: description bullets, specs, shipping/returns</span></div>
+                    <div class="wf__band wf--soft"><b>Reviews</b><span>most shoppers read them before buying</span></div>
+                    <div class="wf__band"><b>Cross-sell</b><span>"pairs well with" recommendations</span></div>
+                    <div class="wf__band wf--cta wf--sticky-bottom"><b>Sticky add-to-cart</b><span>appears when the buy box scrolls away</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Primary conversion:</strong> add to cart → checkout, restated by the sticky bar and the drawer's checkout button. <strong>Classic mistake:</strong> filter dead ends on the listing page (no counts, alphabetical facet dumps) and, on the product page, weak imagery with the buy action buried below the fold on mobile.</p>
+        </article>
+
+        <article class="specimen" id="arch-realestate" data-terms="real estate realtor idx mls property search listings home valuation layout">
+          <div class="specimen__head"><h3>Real Estate</h3><p class="specimen__aka">search-first — the hero is a tool</p><span class="tag">Archetype</span></div>
+          <p class="specimen__desc">The only archetype whose hero is a working widget: an IDX/MLS property search (location, price, beds) over a full-bleed photo, often with a map-search entry point. Everything else supports the two lead funnels — buyers inquiring about listings, and sellers lured by a "what's my home worth?" valuation form.</p>
+          <div class="specimen__demo">
+            <div class="wf" tabindex="0" aria-label="Real estate page wireframe, scrollable">
+              <div class="wf__page">
+                <div class="wf__band wf--hero"><b>Search hero</b><span>IDX search bar: location · price · beds — a functional tool, not a picture</span></div>
+                <div class="wf__band"><b>Featured listings</b><span>photo · price · beds/baths · "view details" cards</span></div>
+                <div class="wf__band wf--cta"><b>Seller funnel</b><span>"What's my home worth?" — the valuation lead magnet</span></div>
+                <div class="wf__band wf--soft"><b>Agent / team</b><span>credibility: sales record, local tenure, photo</span></div>
+                <div class="wf__band"><b>Neighborhood guides</b><span>area pages — local SEO and buyer research</span></div>
+                <div class="wf__band wf--soft"><b>Testimonials</b><span>named buyers and sellers</span></div>
+                <div class="wf__band"><b>Footer</b><span>brokerage, licensing, contact</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Primary conversion:</strong> property inquiries plus home-valuation lead capture — two funnels, one page. <strong>Classic mistake:</strong> hiding the search behind marketing copy; the visitor came to search, and a hero that's just a mood photo sends them to a portal instead.</p>
+        </article>
+
+        <article class="specimen" id="arch-legal" data-terms="law firm attorney lawyer practice areas consultation case results bios layout">
+          <div class="specimen__head"><h3>Legal</h3><p class="specimen__aka">practice areas + results + bios</p><span class="tag">Archetype</span></div>
+          <p class="specimen__desc">Two bands carry weight no other vertical gives them: <b>case results</b> (anonymized, concrete outcomes — often dollar figures in personal injury) and <b>attorney bios</b>, which are the most-visited pages on a firm's site — people hire a lawyer, not a firm. Practice-area cards each link to a deep page; that structure is the site's search backbone. A large share of mobile visitors call straight from the homepage, so the phone sits above the fold beside a "free consultation" offer.</p>
+          <div class="specimen__demo">
+            <div class="wf" tabindex="0" aria-label="Law firm page wireframe, scrollable">
+              <div class="wf__page">
+                <div class="wf__band wf--hero"><b>Hero</b><span>case-type headline ("Injured? …") + clickable phone + free-consultation CTA</span></div>
+                <div class="wf__band"><b>Practice areas</b><span>grid of cards, each a deep page — the SEO backbone</span></div>
+                <div class="wf__band wf--soft"><b>Case results</b><span>concrete, anonymized outcomes — "$2.1M settlement"</span></div>
+                <div class="wf__band"><b>Attorney bios</b><span>real photography, narrative voice — the most-visited pages</span></div>
+                <div class="wf__band wf--soft"><b>Awards &amp; testimonials</b><span>Super Lawyers, Avvo, client quotes</span></div>
+                <div class="wf__band wf--cta"><b>Free consultation</b><span>short form + phone repeated</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Primary conversion:</strong> the call or the free-consultation form. <strong>Classic mistake:</strong> generic gavel-and-columns stock imagery and buried bios — the two things visitors actually came to judge (who are you, what have you won) pushed below interchangeable marketing copy.</p>
+        </article>
+      </section>
+
+      <!-- ================================================================ -->
       <section class="section" id="navigation" data-section="Navigation">
         <header>
           <p class="section-num">02</p>

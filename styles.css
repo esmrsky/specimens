@@ -356,6 +356,23 @@ main { padding: var(--s-6) var(--s-6) var(--s-8); }
 .cover > :nth-child(2) { align-self: center; text-align: center; }
 
 /* --------------------------------------------------------------------------
+   7b. PAGE ARCHETYPES — scrollable mini-page wireframes with labeled bands
+   -------------------------------------------------------------------------- */
+.wf { height: 330px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--r-3); background: var(--bg); scrollbar-width: thin; }
+.wf__page { display: grid; gap: 6px; padding: 8px; }
+.wf__band { display: flex; flex-wrap: wrap; gap: .15rem .8rem; align-items: baseline; justify-content: space-between; padding: .45rem .6rem; border-radius: var(--r-1); background: var(--surface); border: 1px solid var(--border); }
+.wf__band b { font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; color: var(--text); }
+.wf__band span { font-size: .7rem; color: var(--muted); }
+.wf--hero { min-height: 64px; background: linear-gradient(135deg, var(--accent-soft), var(--surface)); }
+.wf--cta { background: var(--accent); border-color: var(--accent); }
+.wf--cta b, .wf--cta span { color: var(--accent-ink); }
+.wf--soft { background: var(--surface-2); }
+.wf--sticky-top { position: sticky; top: 0; z-index: 2; box-shadow: var(--shadow-2); }
+.wf--sticky-bottom { position: sticky; bottom: 0; z-index: 2; box-shadow: var(--shadow-2); }
+.wf-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: var(--s-4); }
+.wf-pair h5 { margin: 0 0 .4rem; font-size: var(--fs--1); color: var(--muted); font-family: var(--font-mono); }
+
+/* --------------------------------------------------------------------------
    8. NAVIGATION SPECIMENS
    -------------------------------------------------------------------------- */
 .crumbs { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; padding: 0; margin: 0; font-size: var(--fs--1); }

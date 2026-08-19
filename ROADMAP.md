@@ -53,7 +53,7 @@ dedicated one:
 
 **Done when:** a reader can name the entrance they want and see it side by side with its alternatives.
 
-## 4 · New: Industry layout archetypes
+## 4 · New: Industry layout archetypes  ✅ done
 
 How different kinds of businesses actually build their sites — the section order, the conventions,
 and *why* each one is there. This is about page-level composition, not visual style: the same
