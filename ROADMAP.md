@@ -3,7 +3,7 @@
 Work queue for Specimens, in priority order. Owner's brief, captured 2026-08-19.
 
 This is meant to be **finished in one pass** — the site is close to done. Work items 1
-through 5 in order, then run the audit. Commit and push after each item so partial
+through 6 in order, then run the audit. Commit and push after each item so partial
 progress survives, and tick items off as they land. Quality over volume: a smaller set of
 specimens that all work beautifully beats a larger set with broken ones.
 
@@ -53,28 +53,65 @@ dedicated one:
 
 **Done when:** a reader can name the entrance they want and see it side by side with its alternatives.
 
-## 4 · 2026-era visual styles
+## 4 · New: Industry layout archetypes
 
-The Visual Style section stops at glassmorphism / neumorphism / neo-brutalism. Add what's current,
-with the same treatment (name, aliases, what it signals, live demo):
+How different kinds of businesses actually build their sites — the section order, the conventions,
+and *why* each one is there. This is about page-level composition, not visual style: the same
+archetype can be executed brutalist or corporate. Give each archetype a compact live wireframe the
+reader can scan, naming each band and what job it does.
 
-- **Tactile / neo-skeuomorphic** — the owner asked for this specifically. Physical-feeling controls:
-  layered inner and outer shadows, subtle bevels and specular highlights, material-like press states
-  with real depth, grain/noise texture overlays, chunky knobs and switches that feel pressable.
-- Others worth covering: spatial/depth UI, soft 3D, dimensional shadows and lighting models,
-  grain and noise, editorial/print-inspired layout, anti-design and maximalist type, dark-first
-  palettes, adaptive/ambient color, motion-forward "living" surfaces.
+Archetypes worth covering (research what these actually look like now, don't work from memory):
 
-**Done when:** the section reads as current, and tactile/skeuomorphic is a first-class specimen
-with a genuinely tactile demo (not a flat mock of one).
+- **Restaurant / hospitality** — photography-led hero, menu as a first-class object, reserve/order
+  CTA pinned within reach, hours + location + map, story/atmosphere section, gallery.
+- **Local service & trades** (plumbing, HVAC, roofing, construction) — phone number in the header and
+  sticky on mobile, service-area coverage, trust signals (licensed, insured, years in business,
+  reviews), before/after gallery, quote-request form, emergency/after-hours banner. The most
+  conversion-driven archetype on this list and the least written about.
+- **Creative portfolio** — work first and chrome last, project index, case-study anatomy
+  (problem → process → outcome), oversized type, deliberate slowness.
+- **SaaS / product** — hero with one claim, social proof strip, feature grid, how-it-works,
+  pricing table, FAQ, closing CTA.
+- **E-commerce** — listing page (filters, sort, facets) vs product page (gallery, variants, trust
+  row, sticky add-to-cart), cart drawer.
+- **Agency / studio, real estate, medical & dental, fitness, legal** — cover the ones with genuinely
+  distinct conventions; skip any that are just the SaaS archetype with different photos.
 
-## 5 · New: Trends section
+For each: name it, list the bands in order, say what the primary conversion action is, and note the
+one mistake sites in that vertical most often make. This section is a favorite of the owner's — give
+it real care.
 
-A section that places styles in time — what's rising, what's peaking, what's dated and why — so the
-reader develops judgment about *when* a look is right, not just what it's called. Keep it honest and
-specific (what problem each trend solves, where it fails); avoid trend-listicle filler.
+## 5 · 2026-era visual styles
 
-## 6 · Standing quality bar — every pass
+The Visual Style section stops at glassmorphism / neumorphism / neo-brutalism. Bring it current —
+but **do not assume any single style leads the year**; an earlier draft of this file asserted
+tactile/neo-skeuomorphism was the headline and the owner pushed back on that framing. Research what
+is actually current before writing, and present a spread rather than a winner.
+
+The through-line as of mid-2026 is a reaction against flat, sterile, AI-generated sameness — warmth,
+texture, and depth coming back. Threads worth covering:
+
+- **Tactile / textural** — grain and noise overlays, material surfaces, physical-feeling controls
+  with real press depth, "tactile brutalism". Include it as a genuinely tactile demo, not a flat
+  mock of one — but as one specimen among several, not the crown.
+- **Organic & soft** — flowing shapes, blobs, soft gradients, curved section breaks.
+- **Kinetic typography** — type as motion and as the primary visual element.
+- **Saturated / dopamine color** — bright, high-contrast, Y2K-nostalgic palettes.
+- **Depth & spatial** — 3D objects, WebGL-ish scenes, layered parallax, dimensional lighting.
+- **Intent-first minimalism** — minimal, but organized around one action rather than one aesthetic.
+- **Adaptive / personalized surfaces** — content that changes by visitor or behavior.
+
+Say what each style *signals* and where it fails, not just how to make it.
+
+## 6 · New: Trends section
+
+Place styles in time — what's rising, what's peaking, what's dated and why — so the reader develops
+judgment about *when* a look is right, not just what it's called. Keep it honest and specific: what
+problem each trend solves, where it breaks down, what it costs. No listicle filler, and no
+predictions stated as fact. Where a trend has already turned (heavy parallax, extreme minimalism,
+neumorphism), say so plainly and say what replaced it.
+
+## 7 · Standing quality bar — every pass
 
 Before committing any pass, confirm:
 
