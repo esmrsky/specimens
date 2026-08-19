@@ -910,7 +910,7 @@
         <header>
           <p class="section-num">07</p>
           <h2>Visual Style</h2>
-          <p>Named aesthetics and the systems (tokens, scales) that keep a design consistent.</p>
+          <p>Named aesthetics and the systems (tokens, scales) that keep a design consistent. The current-era styles further down are a spread, not a ranking: the thread connecting them is a reaction against flat, samey, template-feeling design — texture, warmth, and depth coming back in several directions at once. No single one "leads"; context decides.</p>
         </header>
 
         <article class="specimen" id="tokens" data-terms="css variables custom properties design system theme">
@@ -979,6 +979,78 @@
             <div class="demo-controls"><label>gradient angle <input type="range" data-prop="--grad-angle" data-unit="deg" data-target=".gradient-text" min="0" max="360" step="5" value="90"><output></output></label></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> heroes, one headline per page. Never body text.</p>
+        </article>
+
+        <article class="specimen" id="tactile" data-terms="tactile textural grain noise feTurbulence paper material press depth neo-skeuomorphism 2026">
+          <div class="specimen__head"><h3>Tactile / Textural</h3><p class="specimen__aka">grain &amp; noise overlays, neo-skeuomorphism, material surfaces</p><span class="tag">Style · current</span></div>
+          <p class="specimen__desc">Surfaces that feel touched by hands: film-grain noise from an SVG <code>feTurbulence</code> filter (rendered at runtime, zero image weight), paper-warm gradients, and controls with real press depth — push the button and it physically travels. It signals <em>a human made this</em>, the counter-note to AI-generated sameness. Worth knowing honestly: it draws more critical buzz than shipped usage. It fails when grain sits over low-contrast text, or when imitation goes literal — fake leather is still 2010.</p>
+          <div class="specimen__demo is-flush">
+            <div class="tactile"><h4>Paper, not pixels</h4><p class="small" style="margin:0 0 .9rem;max-width:34ch">Noise overlay + warm gradient + a button with actual travel. Press and hold it.</p><button class="tactile-btn">Press me properly</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> brands selling craft, food, print, music — anywhere warmth beats sheen. Keep grain off body text and below ~15% opacity.</p>
+        </article>
+
+        <article class="specimen" id="organic-soft" data-terms="organic soft blobs flowing shapes curved dividers waves asymmetry 2026">
+          <div class="specimen__head"><h3>Organic &amp; Soft</h3><p class="specimen__aka">blobs, flowing shapes, curved section breaks</p><span class="tag">Style · current</span></div>
+          <p class="specimen__desc">Nature doesn't do 90° corners: blob shapes from eight-value <code>border-radius</code> (this one slowly morphs), wave dividers from a single SVG path, gently asymmetric grids. Signals calm and approachability against rigid template grids. Start subtle — rounded corners and one curved divider — before going full anti-grid; overdone blobs read as 2019 clip-art, and asymmetry that breaks scanning reading order costs more than it charms.</p>
+          <div class="specimen__demo is-flush">
+            <div class="organic"><div class="organic__top"><div class="blob" aria-hidden="true"></div><div><h4 style="margin-bottom:.2rem">Soft geometry</h4><p class="small" style="margin:0;max-width:30ch">The blob is morphing right now — slowly, which is the point.</p></div></div><svg class="organic__wave" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C 120 42 220 2 320 18 S 520 34 600 14 L 600 40 L 0 40 Z"/></svg><div class="organic__below small">…and the section below flows in under a wave, not a straight rule.</div></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> wellness, education, community, consumer brands courting warmth. Freeze the morph under reduced motion.</p>
+        </article>
+
+        <article class="specimen" id="kinetic-type" data-terms="kinetic typography animated type variable font motion headline 2026">
+          <div class="specimen__head"><h3>Kinetic Typography</h3><p class="specimen__aka">type in motion, animated headlines, variable-font animation</p><span class="tag">Style · current</span></div>
+          <p class="specimen__desc">Type as the primary visual — moving instead of illustrated. Letters wave, stretch, or shift weight (variable fonts can animate <code>font-variation-settings</code> smoothly). A page that leads with kinetic type often needs no hero image at all, which is also a performance win. The iron rule: headlines only. Body copy that moves is unreadable, and everything stops under <code>prefers-reduced-motion</code>.</p>
+          <div class="specimen__demo">
+            <p class="kinetic" id="kineticType" aria-label="Type can carry the page">Type can carry the page</p>
+            <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="kineticReplay">↻ Replay</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> editorial, event, studio, and campaign sites where the message <em>is</em> the visual. One kinetic moment per view.</p>
+        </article>
+
+        <article class="specimen" id="dopamine" data-terms="dopamine color saturated bright y2k nostalgia neon maximalism chrome 2026">
+          <div class="specimen__head"><h3>Saturated / Dopamine Color</h3><p class="specimen__aka">dopamine design, Y2K revival, neon maximalism</p><span class="tag">Style · current</span></div>
+          <p class="specimen__desc">Loud, high-contrast, joy-first palettes — neon gradients, chrome sheens, Y2K-nostalgic pinks and cyber-purples. Flip the switch: same layout, different energy. It signals youth and confidence and photographs beautifully on social; it fails in trust-critical contexts (banks, clinics), punishes sloppy contrast, and nostalgia only lands with an audience that has the referent.</p>
+          <div class="specimen__demo">
+            <div class="dopa" id="dopaCard"><span class="dopa__badge">New drop</span><h4 style="margin:.3rem 0 .2rem">Turn the volume up</h4><p class="dopa__sub small" style="margin:0 0 .8rem">Same card, two moods.</p><button class="dopa__btn">Add to bag</button></div>
+            <div class="demo-controls"><label class="switch"><input type="checkbox" id="dopaToggle" role="switch"><span class="switch__track"></span>Dopamine mode</label></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> fashion, music, snacks, events, youth products. Check every pair against WCAG — saturation is not contrast.</p>
+        </article>
+
+        <article class="specimen" id="depth-spatial" data-terms="3d depth spatial tilt parallax dimensional lighting liquid glass webgl 2026">
+          <div class="specimen__head"><h3>Depth &amp; Spatial</h3><p class="specimen__aka">3D tilt, dimensional lighting, liquid glass, WebGL scenes</p><span class="tag">Style · current</span></div>
+          <p class="specimen__desc">Interfaces that acknowledge a third axis: pointer-tracked tilt, a specular highlight that follows your cursor (move it over the card), layered translucency — the direction Apple pushed mainstream with its glassy 2025 design language, and the high end takes further with WebGL scenes. Its known failure is legibility: glass over busy backgrounds breaks contrast badly enough that even Apple shipped an opacity toggle after complaints. Depth is seasoning, not the meal.</p>
+          <div class="specimen__demo">
+            <div class="tilt-stage" id="tiltStage"><div class="tilt" id="tiltCard"><h4 style="margin-bottom:.2rem">Dimensional card</h4><p class="small muted" style="margin:0">Tilts toward your pointer; the light follows. Touch or keyboard? It floats on its own.</p></div></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> product showcases, portfolios, launch pages on capable devices. Cap tilt at ~10°, disable under reduced motion, and never put essential text on moving glass.</p>
+        </article>
+
+        <article class="specimen" id="intent-minimalism" data-terms="intent-first minimalism warm purposeful one action focus calm 2026">
+          <div class="specimen__head"><h3>Intent-First Minimalism</h3><p class="specimen__aka">warm minimalism, purposeful reduction</p><span class="tag">Style · current</span></div>
+          <p class="specimen__desc">Minimalism reorganized around one <em>action</em> rather than one aesthetic — everything on screen either advances the single goal or leaves. What separates it from the sterile beige minimalism now considered dated: character-rich type, warmth, and texture survive the cut; only competing asks are removed. Flip the switch to watch the anti-pattern bury the button.</p>
+          <div class="specimen__demo">
+            <div class="intent" id="intentDemo">
+              <p class="intent__kicker">Short course</p>
+              <h4 style="margin-bottom:.2rem">Learn typography in 12 lessons</h4>
+              <p class="muted small" style="margin:0 0 .9rem;max-width:34ch">One idea per lesson. Ten minutes each.</p>
+              <button class="btn">Start lesson one</button>
+              <div class="intent__clutter" aria-hidden="true"><div class="banner" style="font-size:.7rem">🍪 We value your privacy<button class="btn btn--sm">Accept</button></div><div class="row"><button class="btn btn--sm btn--secondary">Newsletter</button><button class="btn btn--sm btn--secondary">Watch video</button><button class="btn btn--sm btn--secondary">Book a call</button><span class="badge badge--danger badge--dot">50% off!!</span></div><div class="intent__chat" title="chat widget">💬</div></div>
+            </div>
+            <div class="demo-controls"><label class="switch"><input type="checkbox" id="intentToggle" role="switch"><span class="switch__track"></span>Add everything else back</label></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> landing pages with one job, checkout flows, focus tools. If two things compete for the click, neither is the intent.</p>
+        </article>
+
+        <article class="specimen" id="adaptive" data-terms="adaptive personalized surfaces generative ui context aware visitor behavior 2026">
+          <div class="specimen__head"><h3>Adaptive / Personalized Surfaces</h3><p class="specimen__aka">generative UI, context-aware content</p><span class="tag">Style · current</span></div>
+          <p class="specimen__desc">The page rearranges itself per visitor — by time, history, or behavior. This little demo actually does it: it knows the hour and remembers your visits via <code>localStorage</code>. At scale the same idea reorders content and CTAs per user, increasingly AI-driven ("generative UI"). The trade-offs are real: unpredictable interfaces erode learned muscle memory, personalization needs data users may not want taken, and every variant is another state to QA. The practical 2026 shape is hybrid — stable pages plus adaptive slots like this one.</p>
+          <div class="specimen__demo">
+            <div class="adapt"><h4 id="adaptGreeting" style="margin-bottom:.2rem">Hello</h4><p class="small muted" id="adaptNote" style="margin:0 0 .8rem"></p><button class="btn btn--sm btn--secondary" id="adaptReset">Forget me</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> return-visit dashboards, onboarding, content feeds. Keep navigation and structure stable; adapt slots, not skeletons.</p>
         </article>
 
         <article class="specimen" id="focus-ring" data-terms="focus-visible outline keyboard accessibility">

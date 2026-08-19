@@ -683,6 +683,56 @@
   $("#billM")?.addEventListener("change", () => setBilling(false));
   $("#billY")?.addEventListener("change", () => setBilling(true));
 
+  /* ---------- 2026 styles: kinetic type, dopamine toggle, tilt, intent, adaptive ---------- */
+  const kinetic = $("#kineticType");
+  if (kinetic) {
+    const text = kinetic.textContent;
+    kinetic.innerHTML = [...text].map((c, i) => `<span style="--i:${i}" aria-hidden="true">${c}</span>`).join("");
+    onFirstView(kinetic, () => kinetic.classList.add("play"));
+    $("#kineticReplay")?.addEventListener("click", () => replay(kinetic));
+  }
+
+  $("#dopaToggle")?.addEventListener("change", (e) => $("#dopaCard")?.classList.toggle("is-loud", e.target.checked));
+
+  const tiltStage = $("#tiltStage"), tiltCard = $("#tiltCard");
+  if (tiltStage && !reducedMotion) {
+    tiltStage.classList.add("is-idle");
+    tiltStage.addEventListener("pointermove", (e) => {
+      if (e.pointerType === "touch") return;
+      tiltStage.classList.remove("is-idle");
+      const r = tiltCard.getBoundingClientRect();
+      const clamp01 = (v) => Math.min(1, Math.max(0, v));
+      const x = clamp01((e.clientX - r.left) / r.width), y = clamp01((e.clientY - r.top) / r.height);
+      tiltCard.style.setProperty("--ry", ((x - .5) * 16).toFixed(1) + "deg");
+      tiltCard.style.setProperty("--rx", ((0.5 - y) * 12).toFixed(1) + "deg");
+      tiltCard.style.setProperty("--gx", (x * 100).toFixed(1) + "%");
+      tiltCard.style.setProperty("--gy", (y * 100).toFixed(1) + "%");
+    });
+    tiltStage.addEventListener("pointerleave", () => {
+      ["--rx", "--ry", "--gx", "--gy"].forEach((p) => tiltCard.style.removeProperty(p));
+      tiltStage.classList.add("is-idle");
+    });
+  }
+
+  $("#intentToggle")?.addEventListener("change", (e) => $("#intentDemo")?.classList.toggle("is-cluttered", e.target.checked));
+
+  // adaptive surface: time-of-day greeting + visit memory (localStorage)
+  const adaptGreeting = $("#adaptGreeting");
+  if (adaptGreeting) {
+    const renderAdapt = () => {
+      const h = new Date().getHours();
+      const daypart = h < 5 ? "Up late" : h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+      let visits = 0;
+      try { visits = (+localStorage.getItem("adaptVisits") || 0) + 1; localStorage.setItem("adaptVisits", visits); } catch {}
+      adaptGreeting.textContent = `${daypart}.`;
+      $("#adaptNote").textContent = visits > 1
+        ? `This is load №${visits} of this demo in your browser — a real site could resume where you left off instead of re-pitching you.`
+        : "First visit, so you get the introduction. Reload and this line will change.";
+    };
+    renderAdapt();
+    $("#adaptReset")?.addEventListener("click", () => { try { localStorage.removeItem("adaptVisits"); } catch {} $("#adaptNote").textContent = "Memory cleared — reload to be greeted as a stranger again."; toast("Forgotten"); });
+  }
+
   /* ---------- Popover fallback for older browsers ---------- */
   if (!HTMLElement.prototype.hasOwnProperty("popover")) {
     $$("[popovertarget]").forEach((b) => { const p = document.getElementById(b.getAttribute("popovertarget")); if (!p) return; p.style.display = "none"; b.addEventListener("click", () => { p.style.display = p.style.display === "none" ? "block" : "none"; }); });

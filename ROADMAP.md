@@ -81,7 +81,7 @@ For each: name it, list the bands in order, say what the primary conversion acti
 one mistake sites in that vertical most often make. This section is a favorite of the owner's — give
 it real care.
 
-## 5 · 2026-era visual styles
+## 5 · 2026-era visual styles  ✅ done
 
 The Visual Style section stops at glassmorphism / neumorphism / neo-brutalism. Bring it current —
 but **do not assume any single style leads the year**; an earlier draft of this file asserted
