@@ -23,7 +23,7 @@ the *name*, the *aliases*, the *when to use it*, and the *live demo*.
 
 **Done when:** zero `specimen__code` occurrences remain and no specimen has lost explanatory value.
 
-## 2 · Everything must be interactive
+## 2 · Everything must be interactive  ✅ done
 
 Any specimen that is currently a static picture should become something the reader can operate —
 click, drag, hover, toggle, resize, or replay. Static demos to fix include (audit for more):

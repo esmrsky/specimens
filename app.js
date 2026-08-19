@@ -10,15 +10,16 @@
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Theme toggle (pattern: dark mode w/ persisted preference) ---------- */
-  const themeBtn = $("#themeBtn");
-  themeBtn?.addEventListener("click", () => {
+  const toggleTheme = () => {
     const html = document.documentElement;
     const current = html.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     const next = current === "dark" ? "light" : "dark";
     html.dataset.theme = next;
     localStorage.setItem("theme", next);
     toast(`Theme: ${next}`);
-  });
+  };
+  $("#themeBtn")?.addEventListener("click", toggleTheme);
+  $$("[data-theme-toggle]").forEach((b) => b.addEventListener("click", toggleTheme));
 
   /* ---------- Sticky header: hide on scroll down, show on scroll up ---------- */
   const header = $("#siteHeader");
@@ -306,6 +307,266 @@
     });
     const updateCounts = () => $$(".kanban__col", kanban).forEach((c) => { $("h5 span", c).textContent = $$(".kanban__card", c).length; });
   }
+
+  /* ---------- Demo controls: generic slider→custom-property + class-toggle bindings ---------- */
+  $$("input[data-prop]").forEach((input) => {
+    const specimen = input.closest(".specimen");
+    const target = specimen?.querySelector(input.dataset.target || ".specimen__demo");
+    const out = input.parentElement.querySelector("output");
+    const apply = () => {
+      const val = input.value + (input.dataset.unit || "");
+      target?.style.setProperty(input.dataset.prop, val);
+      if (out) out.value = val;
+    };
+    input.addEventListener("input", apply); apply();
+  });
+  $$("[data-toggle-class]").forEach((btn) => {
+    const target = btn.closest(".specimen")?.querySelector(btn.dataset.target);
+    btn.addEventListener("click", () => {
+      const on = target?.classList.toggle(btn.dataset.toggleClass);
+      btn.setAttribute("aria-pressed", String(!!on));
+    });
+  });
+
+  /* ---------- RAM grid: auto-fit vs auto-fill ---------- */
+  const ramGrid = $(".ram");
+  $("#ramFit")?.addEventListener("change", () => ramGrid?.classList.remove("is-fill"));
+  $("#ramFill")?.addEventListener("change", () => ramGrid?.classList.add("is-fill"));
+
+  /* ---------- Bento: click a tile to cycle its span ---------- */
+  const BENTO_SPANS = [["", "1×1"], ["span-21", "2×1"], ["span-12", "1×2"], ["span-22", "2×2"], ["span-31", "3×1"]];
+  $("#bentoGrid")?.addEventListener("click", (e) => {
+    const tile = e.target.closest("button.box"); if (!tile) return;
+    const i = BENTO_SPANS.findIndex(([cls]) => cls && tile.classList.contains(cls));
+    const next = BENTO_SPANS[(i + 1 + (i === -1 ? 1 : 0)) % BENTO_SPANS.length] || BENTO_SPANS[0];
+    BENTO_SPANS.forEach(([cls]) => cls && tile.classList.remove(cls));
+    if (next[0]) tile.classList.add(next[0]);
+    tile.textContent = next[1];
+  });
+
+  /* ---------- Full-bleed on/off ---------- */
+  $("#bleedToggle")?.addEventListener("change", (e) => $(".bleed-wrap")?.classList.toggle("no-bleed", !e.target.checked));
+
+  /* ---------- Breadcrumbs: click an ancestor to jump up the trail ---------- */
+  const crumbTrail = $("#crumbTrail"), crumbReset = $("#crumbReset");
+  const crumbHome = crumbTrail?.innerHTML;
+  crumbTrail?.addEventListener("click", (e) => {
+    const a = e.target.closest("a"); if (!a) return;
+    e.preventDefault();
+    const li = a.closest("li");
+    while (li.nextElementSibling) li.nextElementSibling.remove();
+    li.innerHTML = li.textContent; li.setAttribute("aria-current", "page");
+    crumbReset.hidden = false;
+  });
+  crumbReset?.addEventListener("click", () => { crumbTrail.innerHTML = crumbHome; crumbReset.hidden = true; });
+
+  /* ---------- Pagination: a live pager with moving truncation ---------- */
+  const pager = $("#pagerDemo");
+  if (pager) {
+    let page = 2; const total = 12;
+    const renderPager = () => {
+      const nums = new Set([1, total, page - 1, page, page + 1]);
+      const items = [];
+      items.push(`<li><a href="#pagination" data-page="${page - 1}" aria-label="Previous" ${page === 1 ? 'aria-disabled="true"' : ""}>‹</a></li>`);
+      let prev = 0;
+      for (let n = 1; n <= total; n++) {
+        if (!nums.has(n)) continue;
+        if (n - prev > 1) items.push(`<li><span class="ellipsis">…</span></li>`);
+        items.push(`<li><a href="#pagination" data-page="${n}" ${n === page ? 'aria-current="page"' : ""}>${n}</a></li>`);
+        prev = n;
+      }
+      items.push(`<li><a href="#pagination" data-page="${page + 1}" aria-label="Next" ${page === total ? 'aria-disabled="true"' : ""}>›</a></li>`);
+      pager.innerHTML = items.join("");
+    };
+    pager.addEventListener("click", (e) => {
+      const a = e.target.closest("a[data-page]"); if (!a) return;
+      e.preventDefault();
+      const n = +a.dataset.page;
+      if (n >= 1 && n <= total) { page = n; renderPager(); }
+    });
+    renderPager();
+  }
+
+  /* ---------- Stepper: back / continue ---------- */
+  const stepper = $("#stepperDemo");
+  if (stepper) {
+    let step = 1; const steps = $$("li", stepper);
+    const renderSteps = () => {
+      steps.forEach((li, i) => {
+        li.className = i < step ? "is-done" : i === step ? "is-current" : "";
+        $(".dot", li).textContent = i < step ? "✓" : i + 1;
+      });
+      $("#stepBack").disabled = step === 0;
+      $("#stepNext").disabled = step === steps.length - 1;
+    };
+    $("#stepBack")?.addEventListener("click", () => { step = Math.max(0, step - 1); renderSteps(); });
+    $("#stepNext")?.addEventListener("click", () => { step = Math.min(steps.length - 1, step + 1); renderSteps(); });
+    renderSteps();
+  }
+
+  /* ---------- Type scale: one ratio generates every size ---------- */
+  const scaleDemo = $("#scaleDemo"), scaleRatio = $("#scaleRatio");
+  if (scaleDemo && scaleRatio) {
+    const NAMED = [[1.125, "major second"], [1.2, "minor third"], [1.25, "major third"], [1.333, "perfect fourth"], [1.414, "aug. fourth"], [1.5, "perfect fifth"], [1.618, "golden ratio"]];
+    const renderScale = () => {
+      const r = +scaleRatio.value;
+      $$("p[data-exp]", scaleDemo).forEach((p) => {
+        const size = Math.pow(r, +p.dataset.exp);
+        p.style.fontSize = `min(${size}rem, 16vw)`; // cap so the display row can't overflow a phone screen
+        $("small", p).textContent = size.toFixed(2) + "rem";
+      });
+      const named = NAMED.find(([v]) => Math.abs(v - r) < 0.012);
+      $("#scaleRatioOut").value = r.toFixed(3) + (named ? " · " + named[1] : "");
+    };
+    scaleRatio.addEventListener("input", renderScale); renderScale();
+  }
+
+  /* ---------- Fluid type: simulate a viewport width through clamp() ---------- */
+  const fluidRange = $("#fluidRange");
+  if (fluidRange) {
+    const renderFluid = () => {
+      const w = +fluidRange.value;
+      const px = Math.min(Math.max(19.2, 8 + 0.03 * w), 41.6); // clamp(1.2rem, .5rem + 3vw, 2.6rem) at 16px root
+      $("#fluidSample").style.fontSize = px + "px";
+      $("#fluidOut").value = `${w}px → ${px.toFixed(1)}px`;
+    };
+    fluidRange.addEventListener("input", renderFluid); renderFluid();
+  }
+
+  /* ---------- text-wrap: balance on/off ---------- */
+  $("#balanceToggle")?.addEventListener("change", (e) => $("#balanceSample")?.classList.toggle("balance-off", !e.target.checked));
+
+  /* ---------- Skeleton → loaded content ---------- */
+  const skelBtn = $("#skelBtn");
+  skelBtn?.addEventListener("click", () => {
+    const loaded = $("#skelLoaded").hidden;
+    $("#skelLoaded").hidden = !loaded; $("#skelLoading").hidden = loaded;
+    skelBtn.textContent = loaded ? "Load again" : "Finish loading";
+  });
+
+  /* ---------- Empty state ↔ first item ---------- */
+  const setEmpty = (empty) => { $("#emptyState").hidden = !empty; $("#emptyFilled").hidden = empty; };
+  $("#emptyCreate")?.addEventListener("click", () => setEmpty(false));
+  $("#emptyDelete")?.addEventListener("click", () => setEmpty(true));
+
+  /* ---------- Counter badges: click to mark read ---------- */
+  $$(".count").forEach((wrap) => {
+    const btn = $("button", wrap), n = $(".count__n", wrap);
+    if (!btn || !n) return;
+    const original = n.textContent;
+    btn.addEventListener("click", () => {
+      const cleared = !n.hidden;
+      n.hidden = cleared;
+      if (cleared) toast("Marked as read"); else n.textContent = original;
+    });
+  });
+
+  /* ---------- Simulate reduced motion ---------- */
+  $("#simRm")?.addEventListener("change", (e) => document.body.classList.toggle("sim-reduced-motion", e.target.checked));
+
+  /* ---------- Design tokens: swap --accent live ---------- */
+  $$(".accent-swatch").forEach((btn) => btn.addEventListener("click", () => {
+    const c = btn.dataset.accent;
+    if (c) document.documentElement.style.setProperty("--accent", c);
+    else document.documentElement.style.removeProperty("--accent");
+    $$(".accent-swatch").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+  }));
+
+  /* ---------- Elevation & radius: click a swatch, restyle the sample ---------- */
+  $("#shadowSwatches")?.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-level]"); if (!b) return;
+    $("#shadowSample").style.boxShadow = `var(--shadow-${b.dataset.level})`;
+    $("#shadowLabel").textContent = `--shadow-${b.dataset.level}`;
+    $$("#shadowSwatches [data-level]").forEach((s) => s.setAttribute("aria-pressed", String(s === b)));
+  });
+  $("#radiusSwatches")?.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-r]"); if (!b) return;
+    const r = b.dataset.r;
+    $("#radiusSample").style.borderRadius = r;
+    $("#radiusBtn").style.borderRadius = r === "999px" ? "999px" : r;
+    $("#radiusLabel").textContent = r;
+    $$("#radiusSwatches [data-r]").forEach((s) => s.setAttribute("aria-pressed", String(s === b)));
+  });
+
+  /* ---------- Contrast checker: lightness slider → live WCAG ratio ---------- */
+  const contrastRange = $("#contrastRange");
+  if (contrastRange) {
+    const lum = (r, g, b) => {
+      const f = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+      return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+    };
+    const renderContrast = () => {
+      const L = +contrastRange.value;
+      const v = Math.round(L * 2.55);
+      const ratio = (1.05) / (lum(v, v, v) + 0.05);
+      const chip = $("#contrastChip");
+      chip.style.color = `rgb(${v} ${v} ${v})`;
+      const grade = ratio >= 7 ? "✓ AAA" : ratio >= 4.5 ? "✓ AA" : ratio >= 3 ? "large text only" : "✗ fail";
+      $("#contrastOut").value = `${ratio.toFixed(1)}:1 ${grade}`;
+    };
+    contrastRange.addEventListener("input", renderContrast); renderContrast();
+  }
+
+  /* ---------- Stat tiles: simulate a data refresh with count-up ---------- */
+  $("#statsBtn")?.addEventListener("click", () => {
+    $$(".stat").forEach((stat) => {
+      const valueEl = $(".stat__value", stat), deltaEl = $(".stat__delta", stat), line = $(".sparkline polyline", stat);
+      const fmt = valueEl.textContent;
+      let target, render;
+      if (fmt.includes("k")) { target = 20 + Math.random() * 60; render = (v) => v.toFixed(1) + "k"; }
+      else if (fmt.includes("%")) { target = 15 + Math.random() * 40; render = (v) => Math.round(v) + "%"; }
+      else { target = 5000 + Math.random() * 8000; render = (v) => "$" + Math.round(v).toLocaleString("en-US"); }
+      const delta = (Math.random() * 24 - 10);
+      deltaEl.textContent = (delta >= 0 ? "▲ " : "▼ ") + Math.abs(delta).toFixed(1) + "%";
+      deltaEl.className = "stat__delta " + (delta >= 0 ? "up" : "down");
+      line?.setAttribute("stroke", delta >= 0 ? "var(--success)" : "var(--danger)");
+      line?.setAttribute("points", Array.from({ length: 7 }, (_, i) => `${Math.round(i * 100 / 6)},${Math.round(3 + Math.random() * 22)}`).join(" "));
+      const start = performance.now(), dur = reducedMotion ? 1 : 500;
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / dur);
+        valueEl.textContent = render(target * (1 - Math.pow(1 - t, 3)));
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  });
+
+  /* ---------- Timeline: prepend an event ---------- */
+  const TL_EVENTS = ["Out for delivery — courier assigned.", "Customs cleared — no duty owed.", "Arrived at local depot.", "Delivery attempted — nobody home.", "Delivered — signed by J. Doe."];
+  let tlIdx = 0;
+  $("#timelineBtn")?.addEventListener("click", () => {
+    const li = document.createElement("li");
+    const now = new Date();
+    const pad = (n) => String(n).padStart(2, "0");
+    const msg = TL_EVENTS[tlIdx++ % TL_EVENTS.length].split(" — ");
+    li.innerHTML = `<time>${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}</time><strong>${msg[0]}</strong>${msg[1] ? " — " + msg[1] : ""}`;
+    li.className = "t-in";
+    $("#timelineDemo").prepend(li);
+  });
+
+  /* ---------- Avatar stack: overflow into "+N" ---------- */
+  const avatarRange = $("#avatarRange");
+  if (avatarRange) {
+    const POOL = [["AK", "#b3411f"], ["JD", "#6b8fd8"], ["MR", "#2f7d4a"], ["TS", "#b8860b"], ["LC", "#8f3a72"], ["NB", "#2b5fb3"], ["OP", "#b42323"], ["EW", "#4a7d7d"]];
+    const renderAvatars = () => {
+      const n = +avatarRange.value;
+      const shown = Math.min(n, 4);
+      let html = POOL.slice(0, shown).map(([init, c]) => `<div class="avatar" style="background:${c}">${init}</div>`).join("");
+      if (n > shown) html += `<div class="avatar avatar--more">+${n - shown}</div>`;
+      $("#avatarStack").innerHTML = html;
+      $("#avatarCount").textContent = `${n} collaborator${n === 1 ? "" : "s"}`;
+      avatarRange.parentElement.querySelector("output").value = n;
+    };
+    avatarRange.addEventListener("input", renderAvatars); renderAvatars();
+  }
+
+  /* ---------- Pricing: monthly / yearly toggle ---------- */
+  const setBilling = (yearly) => {
+    $$(".price__amt").forEach((amt) => { amt.textContent = yearly ? amt.dataset.y : amt.dataset.m; });
+    $$(".price__per").forEach((p) => { p.textContent = yearly ? "per year (2 months free)" : "per month"; });
+  };
+  $("#billM")?.addEventListener("change", () => setBilling(false));
+  $("#billY")?.addEventListener("change", () => setBilling(true));
 
   /* ---------- Popover fallback for older browsers ---------- */
   if (!HTMLElement.prototype.hasOwnProperty("popover")) {
