@@ -623,6 +623,86 @@ dialog.modal[open] { animation: pop var(--dur-slow) var(--ease-out); }
 .animate-height > div { overflow: hidden; }
 
 /* --------------------------------------------------------------------------
+   12b. ENTRANCES & EXITS
+   Boxes are visible with no JS; the .play class (added by app.js) runs the
+   entrance so nothing essential is ever hidden if scripts fail.
+   -------------------------------------------------------------------------- */
+.ent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--s-4); }
+.ent { margin: 0; }
+.ent__stage { display: grid; place-items: center; min-height: 90px; background: var(--surface-2); border-radius: var(--r-3); cursor: pointer; }
+.ent__box { width: 72px; height: 56px; border-radius: var(--r-2); background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-size: var(--fs--1); font-weight: 600; }
+.ent figcaption { font-size: .7rem; font-family: var(--font-mono); color: var(--muted); margin-top: .4rem; }
+.play .ent--fade  { animation: ent-fade .3s var(--ease-out) both; }
+.play .ent--rise  { animation: ent-rise .35s var(--ease-out) both; }
+.play .ent--scale { animation: ent-scale .3s var(--ease-out) both; }
+.play .ent--blur  { animation: ent-blur .4s var(--ease-out) both; }
+.play .ent--wipe  { animation: ent-wipe .5s var(--ease-out) both; }
+.play .ent--clip  { animation: ent-clip .5s var(--ease-out) both; }
+@keyframes ent-fade  { from { opacity: 0; } }
+@keyframes ent-rise  { from { opacity: 0; transform: translateY(24px); } }
+@keyframes ent-scale { from { opacity: 0; transform: scale(.85); } }
+@keyframes ent-blur  { from { opacity: 0; filter: blur(8px); } }
+@keyframes ent-wipe  { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@keyframes ent-clip  { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(75% at 50% 50%); } }
+
+/* staggered text reveal — spans are injected by JS; delay comes from --i */
+.text-reveal { font-size: var(--fs-2); font-weight: 800; margin: 0; line-height: 1.2; letter-spacing: -.01em; }
+.text-reveal span { display: inline-block; white-space: pre; }
+.text-reveal.play span { animation: ent-rise .45s var(--ease-out) both; animation-delay: calc(var(--i) * var(--tr-delay, 60ms)); }
+
+/* count-up */
+.countup { font-size: var(--fs-3); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+
+/* draw-on stroke */
+.draw-svg circle, .draw-svg path { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.draw-svg.play circle, .draw-svg.play path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .9s var(--ease-in-out) forwards; }
+.draw-svg.play path:nth-of-type(1) { animation-delay: .5s; }
+.draw-svg.play path:nth-of-type(2) { animation-delay: .9s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* exit asymmetry: enter 400ms ease-out, exit 180ms ease-in */
+.exit-stage { min-height: 90px; }
+.exit-card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: var(--r-3); padding: var(--s-4); max-width: 320px; box-shadow: var(--shadow-2); }
+.exit-card.entering { animation: ent-rise .4s var(--ease-out) both; }
+.exit-card.leaving { animation: exit-down .18s ease-in both; }
+@keyframes exit-down { to { opacity: 0; transform: translateY(8px); } }
+
+/* FLIP list */
+.flip-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+.flip-item { display: inline-flex; align-items: center; gap: .4em; padding: .35em .5em .35em .8em; border: 1px solid var(--border); border-radius: var(--r-pill); background: var(--surface); font-size: var(--fs--1); font-weight: 600; }
+.flip-item button { border: 0; background: var(--surface-2); border-radius: 50%; width: 18px; height: 18px; line-height: 1; font-size: .7rem; display: grid; place-items: center; }
+
+/* @starting-style enter/exit — hidden state is real display:none */
+.ss-panel { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--success); border-radius: var(--r-3); padding: var(--s-4); max-width: 340px; opacity: 1; transform: none; transition: opacity .3s var(--ease-out), transform .3s var(--ease-out), display .3s allow-discrete, overlay .3s allow-discrete; }
+.ss-panel[hidden] { display: none; opacity: 0; transform: translateY(8px); }
+@starting-style { .ss-panel { opacity: 0; transform: translateY(8px); } }
+
+/* view transitions demo */
+.vt-grid { display: grid; grid-template-columns: repeat(4, minmax(52px, 72px)); gap: .6rem; }
+.vt-tile { aspect-ratio: 1; border-radius: var(--r-3); display: grid; place-items: center; color: #fff; font-weight: 800; }
+.vt-tile:nth-child(1) { view-transition-name: vt-a; } .vt-tile:nth-child(2) { view-transition-name: vt-b; }
+.vt-tile:nth-child(3) { view-transition-name: vt-c; } .vt-tile:nth-child(4) { view-transition-name: vt-d; }
+
+/* scroll-driven animations — everything below is progressive enhancement */
+.sd-scroller { height: 240px; overflow-y: auto; position: relative; border-radius: var(--r-3); background: var(--surface-2); }
+.sd-progress { position: sticky; top: 0; height: 4px; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); z-index: 1; }
+.sd-inner { padding: var(--s-4); display: grid; gap: var(--s-6); padding-bottom: var(--s-7); }
+.sd-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-3); padding: var(--s-4); font-size: var(--fs--1); box-shadow: var(--shadow-1); }
+.sd-unsupported { display: none; }
+@supports not (animation-timeline: view()) { .sd-unsupported { display: block; } .sd-progress { display: none; } }
+@supports (animation-timeline: view()) {
+  .sd-progress { animation: sd-progress linear both; animation-timeline: scroll(nearest); }
+  .sd-card { animation: sd-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+}
+@keyframes sd-progress { to { transform: scaleX(1); } }
+@keyframes sd-rise { from { opacity: 0; transform: translateY(24px); } }
+
+/* orchestration */
+.orch { display: grid; gap: var(--s-3); justify-items: start; max-width: 360px; }
+.orch__media { width: 100%; aspect-ratio: 16/6; border-radius: var(--r-3); background: linear-gradient(135deg, var(--accent-soft), var(--accent)); }
+.orch.play > * { animation: ent-rise .5s var(--ease-out) both; animation-delay: var(--d, 0ms); }
+
+/* --------------------------------------------------------------------------
    13. VISUAL STYLE SPECIMENS
    -------------------------------------------------------------------------- */
 .swatches { display: flex; gap: var(--s-4); flex-wrap: wrap; }

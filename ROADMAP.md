@@ -36,7 +36,7 @@ click, drag, hover, toggle, resize, or replay. Static demos to fix include (audi
 
 **Done when:** no specimen is a still image of an idea. Each one *does* something.
 
-## 3 · Deeper animation coverage — how things appear
+## 3 · Deeper animation coverage — how things appear  ✅ done
 
 The Motion section is broad but shallow on **entrance and exit choreography**, which is what the
 owner most wants to learn. Expand into a fuller treatment, either as a larger Motion section or a

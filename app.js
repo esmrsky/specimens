@@ -308,6 +308,121 @@
     const updateCounts = () => $$(".kanban__col", kanban).forEach((c) => { $("h5 span", c).textContent = $$(".kanban__card", c).length; });
   }
 
+  /* ---------- Entrances & Exits ---------- */
+  const replay = (el) => { if (!el) return; el.classList.remove("play"); void el.offsetWidth; el.classList.add("play"); };
+  const onFirstView = (el, fn) => {
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) { fn(); return; }
+    const io = new IntersectionObserver((es, obs) => es.forEach((en) => { if (en.isIntersecting) { obs.disconnect(); fn(); } }), { threshold: .35 });
+    io.observe(el);
+  };
+
+  // entrance families: play on first view; replay all; replay one tile on click/Enter
+  const entGrid = $("#entGrid");
+  onFirstView(entGrid, () => entGrid.classList.add("play"));
+  $("#entReplay")?.addEventListener("click", () => replay(entGrid));
+  const replayTile = (stage) => {
+    entGrid.classList.add("play");
+    const box = $(".ent__box", stage);
+    box.style.animation = "none"; void box.offsetWidth; box.style.animation = "";
+  };
+  entGrid?.addEventListener("click", (e) => { const s = e.target.closest(".ent__stage"); if (s) replayTile(s); });
+  entGrid?.addEventListener("keydown", (e) => { const s = e.target.closest(".ent__stage"); if (s && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); replayTile(s); } });
+
+  // staggered text reveal (real text stays in aria-label on the container)
+  const trEl = $("#textReveal");
+  const TR_TEXT = trEl?.textContent || "";
+  const splitTr = (byLetter) => {
+    trEl.style.setProperty("--tr-delay", byLetter ? "35ms" : "60ms");
+    const parts = byLetter ? [...TR_TEXT] : TR_TEXT.split(/(\s+)/).filter(Boolean);
+    trEl.innerHTML = parts.map((p, i) => `<span style="--i:${i}" aria-hidden="true">${p}</span>`).join("");
+    replay(trEl);
+  };
+  if (trEl) {
+    onFirstView(trEl, () => splitTr(false));
+    $("#trWords")?.addEventListener("change", () => splitTr(false));
+    $("#trLetters")?.addEventListener("change", () => splitTr(true));
+    $("#trReplay")?.addEventListener("click", () => splitTr($("#trLetters").checked));
+  }
+
+  // number count-up
+  const runCount = (el) => {
+    const target = +el.dataset.value, dec = +(el.dataset.decimals || 0), suffix = el.dataset.suffix || "";
+    const start = performance.now(), dur = reducedMotion ? 1 : 1200;
+    const fmt = (v) => v.toFixed(dec).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix;
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      el.textContent = fmt(target * (1 - Math.pow(1 - t, 3)));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const countEls = [$("#countUp1"), $("#countUp2")].filter(Boolean);
+  onFirstView(countEls[0], () => countEls.forEach(runCount));
+  $("#countReplay")?.addEventListener("click", () => countEls.forEach(runCount));
+
+  // draw-on SVG stroke
+  const drawSvg = $("#drawSvg");
+  onFirstView(drawSvg, () => drawSvg.classList.add("play"));
+  $("#drawReplay")?.addEventListener("click", () => replay(drawSvg));
+
+  // exit asymmetry
+  const exitCard = $("#exitCard"), exitToggle = $("#exitToggle");
+  exitToggle?.addEventListener("click", () => {
+    const showing = !exitCard.hidden && !exitCard.classList.contains("leaving");
+    if (showing) {
+      exitCard.classList.remove("entering"); exitCard.classList.add("leaving");
+      const hide = () => { exitCard.hidden = true; exitCard.classList.remove("leaving"); };
+      if (reducedMotion) hide(); else exitCard.addEventListener("animationend", hide, { once: true });
+      exitToggle.textContent = "Bring it back"; exitToggle.setAttribute("aria-pressed", "false");
+    } else {
+      exitCard.hidden = false; exitCard.classList.remove("leaving"); exitCard.classList.add("entering");
+      exitToggle.textContent = "Dismiss"; exitToggle.setAttribute("aria-pressed", "true");
+    }
+  });
+
+  // FLIP removal reflow (Web Animations API)
+  const flipList = $("#flipList");
+  const FLIP_ITEMS = ["Research", "Wireframe", "Prototype", "Test", "Ship", "Iterate"];
+  const renderFlip = () => { if (flipList) flipList.innerHTML = FLIP_ITEMS.map((t) => `<span class="flip-item">${t} <button aria-label="Remove ${t}">×</button></span>`).join(""); };
+  renderFlip();
+  flipList?.addEventListener("click", (e) => {
+    const btn = e.target.closest("button"); if (!btn) return;
+    const item = btn.closest(".flip-item");
+    const others = $$(".flip-item", flipList).filter((el) => el !== item);
+    const first = new Map(others.map((el) => [el, el.getBoundingClientRect()]));
+    item.remove();
+    others.forEach((el) => {
+      const f = first.get(el), l = el.getBoundingClientRect();
+      const dx = f.left - l.left, dy = f.top - l.top;
+      if (dx || dy) el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], { duration: reducedMotion ? 1 : 300, easing: "cubic-bezier(.16,1,.3,1)" });
+    });
+  });
+  $("#flipRestore")?.addEventListener("click", renderFlip);
+
+  // @starting-style panel
+  const ssPanel = $("#ssPanel"), ssToggle = $("#ssToggle");
+  ssToggle?.addEventListener("click", () => {
+    const show = ssPanel.hidden;
+    ssPanel.hidden = !show;
+    ssToggle.textContent = show ? "Hide the panel" : "Show the panel";
+    ssToggle.setAttribute("aria-expanded", String(show));
+  });
+  if (ssPanel && !CSS.supports?.("transition-behavior", "allow-discrete")) $("#ssSupport").textContent = "This browser doesn't support allow-discrete yet — the panel snaps instead of animating.";
+
+  // view transitions
+  const vtGrid = $("#vtGrid"), vtSupport = $("#vtSupport");
+  if (vtSupport) vtSupport.textContent = document.startViewTransition ? "✓ supported in this browser" : "✗ no support here — the shuffle happens instantly";
+  $("#vtShuffle")?.addEventListener("click", () => {
+    const shuffle = () => $$(".vt-tile", vtGrid).sort(() => Math.random() - .5).forEach((t) => vtGrid.append(t));
+    if (document.startViewTransition && !reducedMotion) document.startViewTransition(shuffle); else shuffle();
+  });
+
+  // orchestration
+  const orchDemo = $("#orchDemo");
+  onFirstView(orchDemo, () => orchDemo.classList.add("play"));
+  $("#orchReplay")?.addEventListener("click", () => replay(orchDemo));
+
   /* ---------- Demo controls: generic slider→custom-property + class-toggle bindings ---------- */
   $$("input[data-prop]").forEach((input) => {
     const specimen = input.closest(".specimen");

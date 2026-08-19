@@ -623,6 +623,124 @@
       </section>
 
       <!-- ================================================================ -->
+      <section class="section" id="entrances" data-section="Entrances &amp; Exits">
+        <header>
+          <p class="section-num">07</p>
+          <h2>Entrances &amp; Exits</h2>
+          <p>How things appear and disappear. An entrance tells the user what just arrived and why; an exit gets out of the way. The craft is choosing the family, the duration, and the choreography — not adding more motion.</p>
+        </header>
+
+        <article class="specimen" id="entrance-gallery" data-terms="fade rise slide-up scale-in blur-in wipe mask clip-path reveal appear enter animation families">
+          <div class="specimen__head"><h3>The Entrance Families</h3><p class="specimen__aka">fade-in, rise (slide-up), scale-in, blur-in, wipe, clip reveal</p><span class="tag">Entrances</span></div>
+          <p class="specimen__desc">Six ways to arrive, side by side — click any tile to replay it alone. Each says something different: <b>fade</b> is neutral; <b>rise</b> reads as content settling into place; <b>scale</b> as something newly created; <b>blur</b> as focus arriving; <b>wipe</b> and <b>clip</b> as deliberately unveiling something that was already there. Entrances want 200–500ms and ease-out — fast start, gentle landing.</p>
+          <div class="specimen__demo">
+            <div class="ent-grid" id="entGrid">
+              <figure class="ent"><div class="ent__stage" tabindex="0" role="button" aria-label="Replay fade entrance"><div class="ent__box ent--fade">fade</div></div><figcaption>opacity · 300ms · neutral default</figcaption></figure>
+              <figure class="ent"><div class="ent__stage" tabindex="0" role="button" aria-label="Replay rise entrance"><div class="ent__box ent--rise">rise</div></div><figcaption>opacity + translateY · 350ms · settling in</figcaption></figure>
+              <figure class="ent"><div class="ent__stage" tabindex="0" role="button" aria-label="Replay scale entrance"><div class="ent__box ent--scale">scale</div></div><figcaption>opacity + scale(.85→1) · 300ms · newly born</figcaption></figure>
+              <figure class="ent"><div class="ent__stage" tabindex="0" role="button" aria-label="Replay blur entrance"><div class="ent__box ent--blur">blur</div></div><figcaption>opacity + blur(8px→0) · 400ms · coming into focus</figcaption></figure>
+              <figure class="ent"><div class="ent__stage" tabindex="0" role="button" aria-label="Replay wipe entrance"><div class="ent__box ent--wipe">wipe</div></div><figcaption>clip-path inset · 500ms · curtain reveal</figcaption></figure>
+              <figure class="ent"><div class="ent__stage" tabindex="0" role="button" aria-label="Replay clip entrance"><div class="ent__box ent--clip">clip</div></div><figcaption>clip-path circle · 500ms · spotlight reveal</figcaption></figure>
+            </div>
+            <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="entReplay">↻ Replay all</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> anything appears. Pick one family per surface and stick to it — mixed entrances read as chaos.</p>
+        </article>
+
+        <article class="specimen" id="text-reveal" data-terms="staggered text reveal split letters words headline animation kinetic">
+          <div class="specimen__head"><h3>Staggered Text Reveal</h3><p class="specimen__aka">split-text animation, letter stagger, word cascade</p><span class="tag">Entrances</span></div>
+          <p class="specimen__desc">The headline is split into words or letters and each fragment rises in with a small delay (30–60ms). JS wraps each fragment in a <code>span</code> with an index; one CSS rule turns the index into a delay. Total time should stay under ~700ms — a headline is not a film title.</p>
+          <div class="specimen__demo">
+            <p class="text-reveal" id="textReveal" aria-label="Design is in the details">Design is in the details</p>
+            <div class="demo-controls">
+              <div class="seg" role="radiogroup" aria-label="Split mode"><input type="radio" name="trMode" id="trWords" checked><label for="trWords">by word</label><input type="radio" name="trMode" id="trLetters"><label for="trLetters">by letter</label></div>
+              <button class="btn btn--sm btn--secondary" id="trReplay">↻ Replay</button>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> hero headlines, section titles on marketing pages. Keep the real text in the DOM (<code>aria-label</code> on the container, <code>aria-hidden</code> spans) so screen readers hear a sentence, not letters.</p>
+        </article>
+
+        <article class="specimen" id="count-up" data-terms="number count-up counter animate stats odometer">
+          <div class="specimen__head"><h3>Number Count-Up</h3><p class="specimen__aka">animated counter, stat roll-up</p><span class="tag">Entrances</span></div>
+          <p class="specimen__desc">A statistic counts from zero to its value with an ease-out curve — most of the movement happens early, then it glides to a stop. Built with <code>requestAnimationFrame</code>; use <code>tabular-nums</code> so the digits don't wobble as they change width. Fire it once, when the number first scrolls into view.</p>
+          <div class="specimen__demo">
+            <div class="row" style="gap:var(--s-7)"><div><div class="countup tnum" id="countUp1" data-value="12480" data-suffix="">0</div><p class="small muted" style="margin:0">patterns viewed</p></div><div><div class="countup tnum" id="countUp2" data-value="99.98" data-decimals="2" data-suffix="%">0</div><p class="small muted" style="margin:0">uptime</p></div></div>
+            <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="countReplay">↻ Replay</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> "by the numbers" bands, dashboards on first load. Skip it under reduced motion — jump straight to the value.</p>
+        </article>
+
+        <article class="specimen" id="draw-on" data-terms="svg stroke draw dasharray dashoffset line animation signature">
+          <div class="specimen__head"><h3>Draw-On SVG Stroke</h3><p class="specimen__aka">line drawing animation, stroke-dashoffset trick</p><span class="tag">Entrances</span></div>
+          <p class="specimen__desc">The stroke appears to draw itself: set <code>pathLength="1"</code> on the path, make the dash pattern one full path long (<code>stroke-dasharray: 1</code>), then animate <code>stroke-dashoffset</code> from 1 to 0. Feels handmade — good for checkmarks, signatures, diagrams.</p>
+          <div class="specimen__demo">
+            <svg class="draw-svg" id="drawSvg" viewBox="0 0 120 60" width="180" aria-hidden="true"><circle cx="30" cy="30" r="22" pathLength="1" fill="none"/><path d="M20 30 l7 8 l14 -16" pathLength="1" fill="none"/><path d="M64 42 C 70 18, 84 18, 90 30 S 106 46, 112 24" pathLength="1" fill="none"/></svg>
+            <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="drawReplay">↻ Replay</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> success states, logos, illustrated explainers. One drawing per view.</p>
+        </article>
+
+        <article class="specimen" id="exit-asymmetry" data-terms="exit leave dismiss faster ease-in enter asymmetry">
+          <div class="specimen__head"><h3>Exit Asymmetry</h3><p class="specimen__aka">exits are faster, enter/leave pairing</p><span class="tag">Exits</span></div>
+          <p class="specimen__desc">Entrances and exits are not mirror images. An entrance introduces something, so it takes its time — here 400ms, ease-out, rising. An exit is the user saying "done", so it obeys quickly — 180ms, ease-in, fading down. Toggle the card repeatedly and feel the difference.</p>
+          <div class="specimen__demo">
+            <div class="exit-stage" id="exitStage"><div class="exit-card" id="exitCard"><strong>Notification</strong><p class="small muted" style="margin:.2rem 0 0">Enters in 400ms, leaves in 180ms.</p></div></div>
+            <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="exitToggle" aria-pressed="true">Dismiss</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> pairing any enter/leave: toasts, modals, menus. Rule of thumb — exit duration ≈ half the entrance, ease-in instead of ease-out.</p>
+        </article>
+
+        <article class="specimen" id="flip-remove" data-terms="flip technique removal reflow list animate position web animations api waapi">
+          <div class="specimen__head"><h3>Removal Reflow — FLIP</h3><p class="specimen__aka">First–Last–Invert–Play, animated list removal</p><span class="tag">Exits</span></div>
+          <p class="specimen__desc">When an item leaves a list, the survivors should glide into their new places, not teleport. FLIP: record each item's <b>F</b>irst position, make the change, read the <b>L</b>ast position, <b>I</b>nvert the difference with a transform, then <b>P</b>lay it back to zero — here via the Web Animations API (<code>element.animate</code>). Remove a few:</p>
+          <div class="specimen__demo">
+            <div class="flip-list" id="flipList"></div>
+            <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="flipRestore">Restore all</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> deleting rows, filtering grids, reordering. Anywhere layout jumps, FLIP smooths it.</p>
+        </article>
+
+        <article class="specimen" id="starting-style" data-terms="starting-style transition-behavior allow-discrete display none animate hidden popover">
+          <div class="specimen__head"><h3>@starting-style — animating from display:none</h3><p class="specimen__aka">transition-behavior: allow-discrete, discrete transitions</p><span class="tag">Modern API</span></div>
+          <p class="specimen__desc">Transitions never used to work on elements entering from <code>display: none</code> — there was no "before" style to start from. <code>@starting-style</code> supplies one, and <code>transition-behavior: allow-discrete</code> lets <code>display</code> itself participate, delaying the flip to <code>none</code> until the exit finishes. Pure CSS enter <em>and</em> exit for popovers, dialogs, tooltips.</p>
+          <div class="specimen__demo">
+            <button class="btn btn--sm btn--secondary" id="ssToggle" aria-expanded="true">Hide the panel</button>
+            <div class="ss-panel mt-4" id="ssPanel"><strong>CSS-only enter and exit</strong><p class="small muted" style="margin:.2rem 0 0" id="ssSupport">Both directions animate even though the hidden state is display:none.</p></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> popovers, dialogs, disclosure panels — anywhere you previously needed JS timers just to animate out. Baseline in Chrome/Edge/Safari since 2024; check current Firefox support before relying on it.</p>
+        </article>
+
+        <article class="specimen" id="view-transitions" data-terms="view transitions api startViewTransition morph shared element page transition">
+          <div class="specimen__head"><h3>View Transitions</h3><p class="specimen__aka">startViewTransition, shared-element transitions</p><span class="tag">Modern API</span></div>
+          <p class="specimen__desc">The browser snapshots the page, you mutate the DOM however you like, and it animates between the two states — elements with a shared <code>view-transition-name</code> morph to their new position. One API call replaces a pile of FLIP code. Also works across full page loads in multi-page sites.</p>
+          <div class="specimen__demo">
+            <div class="vt-grid" id="vtGrid"><div class="vt-tile" style="background:var(--accent)">A</div><div class="vt-tile" style="background:var(--info)">B</div><div class="vt-tile" style="background:var(--success)">C</div><div class="vt-tile" style="background:var(--warning)">D</div></div>
+            <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="vtShuffle">Shuffle</button><span class="demo-note" style="margin:0" id="vtSupport"></span></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> list re-sorting, tab-like content swaps, page navigations. Falls back gracefully — without support the change just happens instantly.</p>
+        </article>
+
+        <article class="specimen" id="scroll-driven" data-terms="scroll-driven animation animation-timeline view scroll progress reveal">
+          <div class="specimen__head"><h3>Scroll-Driven Animations</h3><p class="specimen__aka">animation-timeline: view() / scroll(), scroll-linked animation</p><span class="tag">Modern API</span></div>
+          <p class="specimen__desc">The animation's clock is the scroll position, not time — pure CSS, runs off the main thread, no <code>IntersectionObserver</code>. Here the progress bar tracks scroll via <code>scroll()</code> and each card fades up as it crosses into view via <code>view()</code>. Scroll inside the box, then scrub back and forth.</p>
+          <div class="specimen__demo is-flush">
+            <div class="sd-scroller" id="sdScroller"><div class="sd-progress" aria-hidden="true"></div><div class="sd-inner"><p class="small muted" style="margin:0">scroll ↓</p><div class="sd-card">view() — entry 0% → 40%</div><div class="sd-card">the scrubber is the scroll bar</div><div class="sd-card">reverse works too</div><div class="sd-card">no JS anywhere</div><p class="small muted sd-unsupported" style="margin:0">If nothing animates, this browser doesn't support <code>animation-timeline</code> yet (Firefox: behind a flag as of mid-2026).</p></div></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> reading-progress bars, reveal-on-scroll, parallax — replacing scroll-listener JS. Progressive enhancement only; content must be fine without it.</p>
+        </article>
+
+        <article class="specimen" id="orchestration" data-terms="sequence overlap choreography stagger hero entrance order">
+          <div class="specimen__head"><h3>Sequence &amp; Overlap</h3><p class="specimen__aka">choreography, entrance orchestration</p><span class="tag">Entrances</span></div>
+          <p class="specimen__desc">A composed entrance runs elements in reading order — media, then headline, then support, then the action — but <em>overlapping</em>: each starts while the previous is still moving (delays 0 / 120 / 220 / 320ms here). Strictly sequential feels bureaucratic; simultaneous feels like a glitch. The overlap is the craft.</p>
+          <div class="specimen__demo">
+            <div class="orch" id="orchDemo"><div class="orch__media" style="--d:0ms"></div><h4 class="orch__el" style="--d:120ms;margin:0">Headline lands second</h4><p class="orch__el small muted" style="--d:220ms;margin:0">Support copy follows while it's still settling.</p><button class="btn btn--sm orch__el" style="--d:320ms">CTA arrives last</button></div>
+            <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="orchReplay">↻ Replay</button></div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> hero sections, dialog content, onboarding steps. Cap the whole performance at ~700ms — the page should never feel like it's making the user wait.</p>
+        </article>
+      </section>
+
+      <!-- ================================================================ -->
       <section class="section" id="style" data-section="Visual Style">
         <header>
           <p class="section-num">07</p>
