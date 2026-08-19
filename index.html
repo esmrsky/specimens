@@ -7,8 +7,10 @@
 <meta name="description" content="Live, labeled examples of web layouts, components, interactions and visual styles — learn the names and when to use each.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%23b3411f%27/%3E%3Crect x=%279%27 y=%279%27 width=%2714%27 height=%2714%27 rx=%273%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%273%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
-<script>/* pattern: prevent theme flash — apply saved theme before first paint */
-(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<script>/* pattern: prevent theme flash — apply saved theme before first paint.
+   Also mark that JS runs, so CSS may hide reveal-on-scroll elements: without
+   the .js class nothing is ever invisible (progressive enhancement). */
+(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('js');})();</script>
 </head>
 <body>
 
@@ -425,7 +427,7 @@
         <article class="specimen" id="pagination" data-terms="pages next previous numbers">
           <div class="specimen__head"><h3>Pagination</h3><p class="specimen__aka">pager, page numbers</p><span class="tag">Navigation</span></div>
           <p class="specimen__desc">Numbered links through a long list, with truncation ("…") for many pages. Alternatives: <em>infinite scroll</em> (auto-loads more) and <em>load-more button</em>. Pagination is best when users need to return to a specific spot.</p>
-          <div class="specimen__demo"><nav aria-label="Pagination"><ul class="pager" id="pagerDemo"></ul></nav><p class="demo-note">Live — click through; watch the “…” move as you approach the middle.</p></div>
+          <div class="specimen__demo"><nav aria-label="Pagination"><ul class="pager" id="pagerDemo"><li><a href="#pagination" aria-label="Previous">‹</a></li><li><a href="#pagination">1</a></li><li><a href="#pagination" aria-current="page">2</a></li><li><a href="#pagination">3</a></li><li><span class="ellipsis">…</span></li><li><a href="#pagination">12</a></li><li><a href="#pagination" aria-label="Next">›</a></li></ul></nav><p class="demo-note">Live — click through; watch the “…” move as you approach the middle.</p></div>
           <p class="specimen__use"><strong>Use when:</strong> search results, tables, archives.</p>
         </article>
 
@@ -829,7 +831,7 @@
           <div class="specimen__head"><h3>Number Count-Up</h3><p class="specimen__aka">animated counter, stat roll-up</p><span class="tag">Entrances</span></div>
           <p class="specimen__desc">A statistic counts from zero to its value with an ease-out curve — most of the movement happens early, then it glides to a stop. Built with <code>requestAnimationFrame</code>; use <code>tabular-nums</code> so the digits don't wobble as they change width. Fire it once, when the number first scrolls into view.</p>
           <div class="specimen__demo">
-            <div class="row" style="gap:var(--s-7)"><div><div class="countup tnum" id="countUp1" data-value="12480" data-suffix="">0</div><p class="small muted" style="margin:0">patterns viewed</p></div><div><div class="countup tnum" id="countUp2" data-value="99.98" data-decimals="2" data-suffix="%">0</div><p class="small muted" style="margin:0">uptime</p></div></div>
+            <div class="row" style="gap:var(--s-7)"><div><div class="countup tnum" id="countUp1" data-value="12480" data-suffix="">12,480</div><p class="small muted" style="margin:0">patterns viewed</p></div><div><div class="countup tnum" id="countUp2" data-value="99.98" data-decimals="2" data-suffix="%">99.98%</div><p class="small muted" style="margin:0">uptime</p></div></div>
             <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="countReplay">↻ Replay</button></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> "by the numbers" bands, dashboards on first load. Skip it under reduced motion — jump straight to the value.</p>
@@ -859,7 +861,7 @@
           <div class="specimen__head"><h3>Removal Reflow — FLIP</h3><p class="specimen__aka">First–Last–Invert–Play, animated list removal</p><span class="tag">Exits</span></div>
           <p class="specimen__desc">When an item leaves a list, the survivors should glide into their new places, not teleport. FLIP: record each item's <b>F</b>irst position, make the change, read the <b>L</b>ast position, <b>I</b>nvert the difference with a transform, then <b>P</b>lay it back to zero — here via the Web Animations API (<code>element.animate</code>). Remove a few:</p>
           <div class="specimen__demo">
-            <div class="flip-list" id="flipList"></div>
+            <div class="flip-list" id="flipList"><span class="flip-item">Research <button aria-label="Remove Research">×</button></span><span class="flip-item">Wireframe <button aria-label="Remove Wireframe">×</button></span><span class="flip-item">Prototype <button aria-label="Remove Prototype">×</button></span><span class="flip-item">Test <button aria-label="Remove Test">×</button></span><span class="flip-item">Ship <button aria-label="Remove Ship">×</button></span><span class="flip-item">Iterate <button aria-label="Remove Iterate">×</button></span></div>
             <div class="demo-controls"><button class="btn btn--sm btn--secondary" id="flipRestore">Restore all</button></div>
           </div>
           <p class="specimen__use"><strong>Use when:</strong> deleting rows, filtering grids, reordering. Anywhere layout jumps, FLIP smooths it.</p>

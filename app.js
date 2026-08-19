@@ -568,10 +568,11 @@
   $$(".count").forEach((wrap) => {
     const btn = $("button", wrap), n = $(".count__n", wrap);
     if (!btn || !n) return;
-    const original = n.textContent;
+    const original = n.textContent, baseLabel = btn.getAttribute("aria-label").split(",")[0];
     btn.addEventListener("click", () => {
       const cleared = !n.hidden;
       n.hidden = cleared;
+      btn.setAttribute("aria-label", cleared ? `${baseLabel}, no unread` : `${baseLabel}, ${original} unread`);
       if (cleared) toast("Marked as read"); else n.textContent = original;
     });
   });
