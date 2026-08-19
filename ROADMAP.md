@@ -103,7 +103,7 @@ texture, and depth coming back. Threads worth covering:
 
 Say what each style *signals* and where it fails, not just how to make it.
 
-## 6 · New: Trends section
+## 6 · New: Trends section  ✅ done
 
 Place styles in time — what's rising, what's peaking, what's dated and why — so the reader develops
 judgment about *when* a look is right, not just what it's called. Keep it honest and specific: what

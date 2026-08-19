@@ -368,7 +368,7 @@
       <!-- ================================================================ -->
       <section class="section" id="navigation" data-section="Navigation">
         <header>
-          <p class="section-num">02</p>
+          <p class="section-num">03</p>
           <h2>Navigation</h2>
           <p>How people find their way. Good nav answers "where am I, where can I go, how do I get back?"</p>
         </header>
@@ -463,7 +463,7 @@
       <!-- ================================================================ -->
       <section class="section" id="typography" data-section="Typography">
         <header>
-          <p class="section-num">03</p>
+          <p class="section-num">04</p>
           <h2>Typography</h2>
           <p>Ninety-five percent of web design is typography. These are the levers.</p>
         </header>
@@ -549,7 +549,7 @@
       <!-- ================================================================ -->
       <section class="section" id="feedback" data-section="Feedback &amp; Overlays">
         <header>
-          <p class="section-num">04</p>
+          <p class="section-num">05</p>
           <h2>Feedback &amp; Overlays</h2>
           <p>How the interface talks back — telling users what happened, what's loading, and what needs a decision.</p>
         </header>
@@ -635,7 +635,7 @@
       <!-- ================================================================ -->
       <section class="section" id="forms" data-section="Forms &amp; Inputs">
         <header>
-          <p class="section-num">05</p>
+          <p class="section-num">06</p>
           <h2>Forms &amp; Inputs</h2>
           <p>Where users do work. Every control has states; good forms make each state obvious.</p>
         </header>
@@ -714,7 +714,7 @@
       <!-- ================================================================ -->
       <section class="section" id="motion" data-section="Motion">
         <header>
-          <p class="section-num">06</p>
+          <p class="section-num">07</p>
           <h2>Motion</h2>
           <p>Animation should explain, not decorate: where did this come from, where did it go, did my click register? Short (150–400ms), eased, and optional.</p>
         </header>
@@ -790,7 +790,7 @@
       <!-- ================================================================ -->
       <section class="section" id="entrances" data-section="Entrances &amp; Exits">
         <header>
-          <p class="section-num">07</p>
+          <p class="section-num">08</p>
           <h2>Entrances &amp; Exits</h2>
           <p>How things appear and disappear. An entrance tells the user what just arrived and why; an exit gets out of the way. The craft is choosing the family, the duration, and the choreography — not adding more motion.</p>
         </header>
@@ -908,7 +908,7 @@
       <!-- ================================================================ -->
       <section class="section" id="style" data-section="Visual Style">
         <header>
-          <p class="section-num">07</p>
+          <p class="section-num">09</p>
           <h2>Visual Style</h2>
           <p>Named aesthetics and the systems (tokens, scales) that keep a design consistent. The current-era styles further down are a spread, not a ranking: the thread connecting them is a reaction against flat, samey, template-feeling design — texture, warmth, and depth coming back in several directions at once. No single one "leads"; context decides.</p>
         </header>
@@ -1072,9 +1072,63 @@
       </section>
 
       <!-- ================================================================ -->
+      <section class="section" id="trends" data-section="Trends">
+        <header>
+          <p class="section-num">10</p>
+          <h2>Trends</h2>
+          <p>Styles placed in time — what's gathering momentum, what's everywhere, what has already turned. The point isn't fashion-watching; it's judgment: knowing <em>when</em> a look is right, what it costs, and what it will say about the site in three years. Snapshot as of mid-2026; hold it loosely.</p>
+        </header>
+
+        <article class="specimen" id="trend-map" data-terms="trends rising peaking dated lifecycle 2026 what's current momentum">
+          <div class="specimen__head"><h3>The State of the Styles</h3><p class="specimen__aka">rising · peaking · turned</p><span class="tag">Trends</span></div>
+          <p class="specimen__desc">Every entry expands — each one names the problem the trend solves, where it breaks down, and what it costs. "Rising" means loud discourse and growing use, not a guarantee; at least one rising style (tactile/skeuomorphic revival) is talked about far more than it is shipped.</p>
+          <div class="specimen__demo">
+            <div class="trend-board">
+              <div class="trend-col trend-col--rising"><h4>▲ Rising</h4>
+                <details class="trend"><summary>Tactile texture</summary><div><b>Solves:</b> AI-era sameness — grain, warmth and press-depth read as human. <b>Breaks:</b> texture over low-contrast text; literal skeuomorphism reads 2010. <b>Costs:</b> restraint — and the honesty that critical buzz still outpaces shipped usage.</div></details>
+                <details class="trend"><summary>Kinetic typography</summary><div><b>Solves:</b> a hero without hero-image weight; personality from type alone. <b>Breaks:</b> the instant body copy moves; ignoring reduced-motion. <b>Costs:</b> variable-font licensing and motion discipline.</div></details>
+                <details class="trend"><summary>Scroll-driven native CSS</summary><div><b>Solves:</b> scroll-linked motion without JS scroll listeners — smoother and off the main thread. <b>Breaks:</b> browser support is still uneven (Firefox behind a flag mid-2026); must be progressive enhancement. <b>Costs:</b> almost nothing when layered on properly.</div></details>
+                <details class="trend"><summary>Adaptive / generative UI</summary><div><b>Solves:</b> one page serving many intents; returning visitors skip the pitch. <b>Breaks:</b> unpredictable layouts erode muscle memory; privacy cost is real. <b>Costs:</b> every personalized variant is another state to design and QA.</div></details>
+              </div>
+              <div class="trend-col trend-col--peaking"><h4>● Peaking</h4>
+                <details class="trend"><summary>Bento grids</summary><div><b>Solves:</b> showing many unequal things at once with clear hierarchy. <b>Breaks:</b> thin content stretched into boxes; static bentos are starting to look like everyone else. <b>Costs:</b> real content for every cell. The evolution is interactive cells, not abandonment.</div></details>
+                <details class="trend"><summary>Glass / translucency</summary><div><b>Solves:</b> layered depth and context — you see what's behind the panel. <b>Breaks:</b> contrast over busy backgrounds; even Apple added an opacity toggle after legibility complaints. <b>Costs:</b> GPU time on low-end devices. Contested: "defining the era" vs "accent only" — both positions are live.</div></details>
+                <details class="trend"><summary>Mesh / aurora gradients</summary><div><b>Solves:</b> cheap atmosphere, no photography needed. <b>Breaks:</b> it became the background noise of SaaS — differentiation now needs motion or restraint. <b>Costs:</b> genericness more than performance.</div></details>
+                <details class="trend"><summary>3D &amp; WebGL scenes</summary><div><b>Solves:</b> product showcases and award-tier immersion nothing else matches. <b>Breaks:</b> payload, battery, accessibility; useless for content-first sites. <b>Costs:</b> specialist build effort — which is why it peaks at the high end and only trickles down.</div></details>
+                <details class="trend"><summary>Neo-brutalism</summary><div><b>Solves:</b> instant personality; impossible to mistake for a template. <b>Breaks:</b> dense productivity UIs; the chaotic variant tests badly for task success. <b>Costs:</b> it splits — disciplined brutalism thrives, anti-design brutalism is already fading.</div></details>
+              </div>
+              <div class="trend-col trend-col--turned"><h4>▼ Turned</h4>
+                <details class="trend"><summary>Heavy parallax</summary><div><b>Solved:</b> 2013's hunger for cinematic scrolling. <b>Turned because:</b> motion sickness, jank, and content held hostage by choreography. <b>Now:</b> subtle single-layer depth, or native scroll-driven animation.</div></details>
+                <details class="trend"><summary>Scroll-jacking</summary><div><b>Solved:</b> forcing a narrative sequence. <b>Turned because:</b> it fights the user's own scroll — the one interaction they own. <b>Now:</b> scroll-driven CSS that follows the reader instead of driving them.</div></details>
+                <details class="trend"><summary>Extreme minimalism</summary><div><b>Solved:</b> 2018's clutter, and it photographed well in portfolios. <b>Turned because:</b> beige-on-white sameness became its own noise, then AI templates made it free. <b>Now:</b> warm minimalism — still reduced, but with character-rich type and texture.</div></details>
+                <details class="trend"><summary>Neumorphism</summary><div><b>Solved:</b> soft, calm, single-surface aesthetics. <b>Turned because:</b> contrast and affordance failures were structural, not fixable. <b>Now:</b> a niche survivor in instrument-style UIs (players, smart-home), and soft shadows used <em>with</em> borders and labels.</div></details>
+                <details class="trend"><summary>Hero video backgrounds</summary><div><b>Solved:</b> instant atmosphere. <b>Turned because:</b> they wreck load metrics and mobile data budgets for decoration. <b>Now:</b> big type, gradients, lightweight 3D.</div></details>
+                <details class="trend"><summary>Auto-carousels &amp; custom cursors</summary><div><b>Solved:</b> stakeholder arguments (put everything in the hero). <b>Turned because:</b> slide two is where content goes to die, and cursor gimmicks tax usability. <b>Now:</b> curated static heroes; one thing said well.</div></details>
+              </div>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> choosing a direction for a redesign — check which column your reference sites live in, and how close to "turned" the look you love is.</p>
+        </article>
+
+        <article class="specimen" id="trend-judgment" data-terms="judging trends when to adopt disagreements flat design dead lifecycle adopt">
+          <div class="specimen__head"><h3>How to Judge a Trend</h3><p class="specimen__aka">the three questions + honest disagreements</p><span class="tag">Trends</span></div>
+          <p class="specimen__desc">Before adopting any look, ask: <b>1.</b> What problem does it solve for <em>this</em> site — or is it decoration? <b>2.</b> Where does it break — and does that overlap with your users (motion sensitivity, old devices, screen readers)? <b>3.</b> What does it cost — build time, performance budget, accessibility risk, and how soon it will date. A trend that survives all three questions isn't a trend for you anymore; it's a decision. Some questions the industry itself hasn't settled — disagreements below, left unresolved on purpose.</p>
+          <div class="specimen__demo">
+            <div class="acc">
+              <details><summary>"Flat design is dead" — is it?</summary><div>As an ideology, yes: nobody argues for pure flatness anymore. As a substrate, no: most shipped UI is still flat surfaces with subtle depth and motion layered on ("flat-plus"). Both headlines exist in 2026 sources because both are true at different altitudes.</div></details>
+              <details><summary>Is glass the defining look or an accent?</summary><div>One camp points at Apple pushing translucency across every OS; the other points at the accessibility backlash and Apple's own opacity concession. Safe reading: glass is a legitimate layer treatment, not a system-wide identity — the disagreement is about dosage.</div></details>
+              <details><summary>Bento: must-have or already tired?</summary><div>Usage data says it's near-standard for SaaS homepages; commentary increasingly calls static bentos samey. Both are right — the grid is now table stakes, and differentiation moved inside the cells (live data, interaction, motion).</div></details>
+              <details><summary>Does the tactile revival actually ship?</summary><div>It dominates 2026 trend writing, but at least one large telemetry set found skeuomorphic styles in a fraction of a percent of real projects. Discourse leads production by a year or more — which is exactly why "one thread among several" is the honest framing.</div></details>
+            </div>
+          </div>
+          <p class="specimen__use"><strong>Use when:</strong> a stakeholder says "make it look like [award-winning site]" — run the three questions out loud before you commit the budget.</p>
+        </article>
+      </section>
+
+      <!-- ================================================================ -->
       <section class="section" id="data" data-section="Data &amp; Content">
         <header>
-          <p class="section-num">08</p>
+          <p class="section-num">11</p>
           <h2>Data &amp; Content Display</h2>
           <p>Named containers for showing stuff: cards, tables, stats, timelines.</p>
         </header>
@@ -1153,7 +1207,7 @@
       <!-- ================================================================ -->
       <section class="section" id="glossary" data-section="Glossary">
         <header>
-          <p class="section-num">09</p>
+          <p class="section-num">12</p>
           <h2>Glossary</h2>
           <p>Vocabulary that comes up in design reviews, tutorials, and hand-offs. Knowing the word is half of noticing the thing.</p>
         </header>

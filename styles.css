@@ -822,6 +822,24 @@ button.swatch { cursor: pointer; }
 .contrast-chip { display: inline-block; padding: .5rem .8rem; border-radius: var(--r-2); font-size: var(--fs--1); font-weight: 600; }
 
 /* --------------------------------------------------------------------------
+   13b. TRENDS
+   -------------------------------------------------------------------------- */
+.trend-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: var(--s-4); align-items: start; }
+.trend-col { background: var(--surface-2); border-radius: var(--r-3); padding: var(--s-3); }
+.trend-col h4 { font-size: var(--fs--1); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 .6rem; padding: 0 .2rem; }
+.trend-col--rising h4 { color: var(--success); }
+.trend-col--peaking h4 { color: var(--info); }
+.trend-col--turned h4 { color: var(--muted); }
+details.trend { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-2); margin-bottom: .5rem; }
+details.trend:last-child { margin-bottom: 0; }
+details.trend summary { list-style: none; cursor: pointer; padding: .55rem .7rem; font-weight: 600; font-size: var(--fs--1); display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+details.trend summary::-webkit-details-marker { display: none; }
+details.trend summary::after { content: "+"; color: var(--muted); font-weight: 400; transition: transform var(--dur); }
+details.trend[open] summary::after { transform: rotate(45deg); }
+details.trend > div { padding: 0 .7rem .7rem; font-size: var(--fs--1); color: var(--muted); }
+details.trend b { color: var(--text); }
+
+/* --------------------------------------------------------------------------
    14. DATA DISPLAY SPECIMENS
    -------------------------------------------------------------------------- */
 .table-wrap { overflow: auto; max-height: 200px; border: 1px solid var(--border); border-radius: var(--r-3); }
