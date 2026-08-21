@@ -11,6 +11,13 @@
    Also mark that JS runs, so CSS may hide reveal-on-scroll elements: without
    the .js class nothing is ever invisible (progressive enhancement). */
 (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('js');})();</script>
+<style id="polish-pack">/* touch + type courtesies (estate pass 2026-08) */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,a,button,summary,label,[role="button"]{-webkit-tap-highlight-color:transparent}
+a,button,summary,[role="button"]{touch-action:manipulation}
+@media (pointer:coarse){a:active,button:active,summary:active,[role="button"]:active{scale:.975}}
+h1,h2,h3{text-wrap:balance}
+</style>
 </head>
 <body>
 
