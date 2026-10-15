@@ -923,3 +923,6 @@ table.data td.num, table.data th.num { text-align: right; font-variant-numeric: 
 .muted { color: var(--muted); }
 .mono { font-family: var(--font-mono); }
 .small { font-size: var(--fs--1); }
+
+/* turn the marker back as a close starts (/assets/ease-details.js) */
+.acc details.is-closing summary::after,details.trend.is-closing summary::after{transform:none}
