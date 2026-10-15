@@ -542,7 +542,7 @@ dialog.modal[open] { animation: pop var(--dur-slow) var(--ease-out); }
 
 .float { position: relative; max-width: 320px; }
 .float .input { padding-top: 1.1rem; padding-bottom: .35rem; }
-.float label { position: absolute; left: .75rem; top: .8rem; color: var(--muted); pointer-events: none; transition: all var(--dur-fast) var(--ease-out); font-size: var(--fs-0); }
+.float label { position: absolute; left: .75rem; top: .8rem; color: var(--muted); pointer-events: none; transition: top var(--dur-fast) var(--ease-out), font-size var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); font-size: var(--fs-0); }
 .float .input:focus + label, .float .input:not(:placeholder-shown) + label { top: .3rem; font-size: .7rem; color: var(--accent); }
 
 .switch { display: inline-flex; align-items: center; gap: .6rem; cursor: pointer; }
