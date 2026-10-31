@@ -11,12 +11,15 @@
    Also mark that JS runs, so CSS may hide reveal-on-scroll elements: without
    the .js class nothing is ever invisible (progressive enhancement). */
 (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add('js');})();</script>
-<style id="polish-pack">/* touch + type courtesies (estate pass 2026-08) */
+<style id="polish-pack">/* touch + type courtesies (estate pass Aug 2026; paragraphs Oct 15, 2026; every other text block Oct 30, 2026) */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 html,a,button,summary,label,[role="button"]{-webkit-tap-highlight-color:transparent}
 a,button,summary,[role="button"]{touch-action:manipulation}
 @media (pointer:coarse){a:active,button:active,summary:active,[role="button"]:active{scale:.975}}
+body{text-wrap-style:pretty}
 h1,h2,h3{text-wrap:balance}
+:where(h4,h5,h6,summary,legend,caption,dt,th,button){text-wrap-style:balance}
+p,li,dd,figcaption{text-wrap:pretty}
 </style>
 <script src="/assets/ease-details.js" defer></script>
 </head>
